@@ -20,7 +20,6 @@ export const Action = {
             type: Action.Types.SET_TOAST_MESSAGE,
             message
         }),
-
         getUserToken: () => ({
             type: Action.Types.GET_USER_TOKEN,
         }),
