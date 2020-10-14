@@ -1,17 +1,16 @@
 import React from 'react';
 import styled from "styled-components";
 
-const Home = (props) => {
+const Shortcuts = (props) => {
 
     return (
         <Wrapper>
-           Home
+            Shortcuts
         </Wrapper>
     )
 };
 
 const Wrapper = styled.div`
-  background:yellowgreen;
 `;
 
-export default Home;
+export default Shortcuts;

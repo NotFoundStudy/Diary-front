@@ -1,17 +1,20 @@
 import React from 'react';
 import styled from "styled-components";
 
-const Home = (props) => {
-
+const Container = (props) => {
+const{
+    children
+} = props;
     return (
         <Wrapper>
-           Home
+            {children}
         </Wrapper>
     )
 };
 
 const Wrapper = styled.div`
-  background:yellowgreen;
+  width: 1200px;
+  margin: 0 auto;
 `;
 
-export default Home;
+export default Container;
