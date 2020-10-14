@@ -1,21 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const name = 'APP';
+
 const initialState = {
     inputs: {
         email: '',
         password: '',
     },
-    user: {
+    user: { // Login data
         email: '',
         nickname: '',
         accessToken: '',
         loading: false,
         error: null,
-    }, // Login data
+    },
     toastMessage: '',
 };
 
-const reducers = {
+const reducer = {
     changeInput: (state, { payload: input }) => {
         const { name, value } = input;
         state.inputs = {
@@ -53,12 +55,11 @@ const reducers = {
     logout: (state) => {},
     setToastMessage: () => {},
 };
-const name = 'APP';
 
 const slice = createSlice({
     name,
     initialState,
-    reducers,
+    reducer,
 });
 
 export const Name = slice.name;

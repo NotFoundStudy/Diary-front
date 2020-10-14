@@ -2,7 +2,9 @@ import React, {useState} from 'react';
 import styled from "styled-components";
 import {navigate} from "../../helper/historyHelper";
 
-const Login = (props) => {
+const Register = (props) => {
+
+    // login.js 카피본 => ui 재구성 필요
 
     const [id, setId] = useState('');
     const [pw, setPw] = useState('');
@@ -26,7 +28,7 @@ const Login = (props) => {
                    value={pw}
                    onChange={(e) => setPw(e.target.value)}/>
 
-            <ButtonSend onClick={()=>{}}>Login</ButtonSend>
+            <ButtonSend onClick={()=>{}}>Register</ButtonSend>
         </Wrapper>
     )
 };
@@ -94,4 +96,4 @@ const Helps = styled.div`
     }
   }
 `;
-export default Login;
+export default Register;

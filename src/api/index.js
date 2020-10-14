@@ -60,14 +60,9 @@ const request = async (method, url, data) => {
     }
 };
 
-const API = {
-    logIn: (userInfo) => request(fetchEnum.POST, `/login`, userInfo), // Login sample
-
-    // chatList
-    fetchChats: (userId) => request(fetchEnum.GET, `/chats/${userId}`),
-
-    // chatDetail
-    fetchChat: (chatId) => request(fetchEnum.GET, `/chat/${chatId}`),
+const Api = {
+    logInSample: (userInfo) => request(fetchEnum.POST, `/login-sample`, userInfo),
+    fetchSample: (userId) => request(fetchEnum.GET, `/fetch-sample/${userId}`),
 }
 
-export default API;
+export default Api;

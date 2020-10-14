@@ -1,9 +1,7 @@
-import sample from './@sample.jpg'
-import defaultUserImage from './default-user-image.jpg'
+import defaultUser from './default-user.jpg'
 
 const Images = {
-    sample,
-    defaultUserImage
+    defaultUser
 };
 
 export default Images;

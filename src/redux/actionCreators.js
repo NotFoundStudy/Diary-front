@@ -1,9 +1,7 @@
 import store from "./store";
 import {bindActionCreators} from "redux";
-import {Action as appAction} from "./app/redux";
-import {Action as chatsAction} from "./chats/redux";
+import {Action as appAction} from "./app/slice";
 
-const {dispatch} = store;
+const dispatch = store && store.dispatch;
 
 export const appCreators = bindActionCreators(appAction.Creators, dispatch);
-export const chatsCreators = bindActionCreators(chatsAction.Creators, dispatch);
