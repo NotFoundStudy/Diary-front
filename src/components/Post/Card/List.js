@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Pagination from "../../Pagination/Pagination";
 import SearchBar from "../../SearchBar/SearchBar";
 import Card from "./Card";
+import {Col, Row} from "antd";
 
 const List = (props) => {
     const {
@@ -12,11 +13,15 @@ const List = (props) => {
     return (
         <Wrapper>
             <SearchBar/>
+            <Row gutter={16} justify={'center'}>
             {
                 list.map(item =>
-                    <Card key={item.id} item={item}/>
+                    <Col span={6}>
+                        <Card key={item.id} item={item} />
+                    </Col>
                 )
             }
+            </Row>
             <Pagination/>
         </Wrapper>
     )

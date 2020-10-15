@@ -19,6 +19,7 @@ const Card = (props) => {
 };
 
 const StyledCard = styled(AntdCard)`
+  margin: 0 auto;
 `;
 
 export default Card;
