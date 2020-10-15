@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import MainCover from "./MainCover/MainCover";
 import Footer from "./Footer/Footer";
 import Sidebar from "./Sidebar/Sidebar";
-import {Col, Row} from "antd";
+import {Col, Grid, Row} from "antd";
 import Container from "./Container/Container";
 
 const Layout = (props) => {
@@ -12,20 +12,26 @@ const Layout = (props) => {
         children
     } = props;
 
+    const screens = Grid.useBreakpoint();
+    const [rwdVisible, setRwdVisible] = useState(false);
+
     return (
         <Wrapper>
             <MainCover/>
             <Container>
-                {/* Row - gutter : by pixel */}
+                {/* Row - gutter(px)*/}
                 {/* Col - xs : ~576px | sm : ~768px | md : ~992px |  lg : ~1200px */}
-                <StyledRow gutter={16}>
-                    <Col flex={'100px'}>
-                        <Sidebar/>
-                    </Col>
-                    <Col flex="auto">
+                <Row gutter={16} justify={'center'}>
+                    {
+                        !screens.xs &&
+                        <Col flex={'100px'}>
+                            <Sidebar/>
+                        </Col>
+                    }
+                    <Col style={{flexGrow:1}}>
                         {children}
                     </Col>
-                </StyledRow>
+                </Row>
             </Container>
             <Footer/>
         </Wrapper>
@@ -36,10 +42,5 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`;
-const StyledRow = styled(Row)`
-   display: flex;
-   justify-content: center;
-   width: 100%;
 `;
 export default Layout;
