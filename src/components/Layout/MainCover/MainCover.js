@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import RoutePath from "../../RoutePath/RoutePath";
-import Header from "../Header";
+import Header from "../Navbar";
 import Container from "../Container/Container";
 
 const MainCover = (props) => {
