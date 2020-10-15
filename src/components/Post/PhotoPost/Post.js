@@ -9,8 +9,7 @@ const Post = (props) => {
 
     return (
         <Wrapper onClick={() => navigate(`/introduction/people/currentMember/${item.id}`)}>
-            <Thumb
-                src={item.thumbnail}/>
+            <Thumb src={item.thumbnail}/>
             <Desc>
                 <p className={'title'}>{item.name}</p>
                 <p>

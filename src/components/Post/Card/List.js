@@ -1,20 +1,23 @@
 import React from 'react';
 import styled from "styled-components";
-import Post from "./Post";
 import Pagination from "../../Pagination/Pagination";
-
+import SearchBar from "../../SearchBar/SearchBar";
+import Card from "./Card";
 
 const List = (props) => {
     const {
-        list,
+        list
     } = props;
 
     return (
         <Wrapper>
+            <SearchBar/>
             {
-              list.map(item => <Post key={item.id} item={item}/>)
+                list.map(item =>
+                    <Card key={item.id} item={item}/>
+                )
             }
-            <Pagination defaultCurrent={1} total={50} />
+            <Pagination/>
         </Wrapper>
     )
 };
