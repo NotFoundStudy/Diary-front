@@ -1,21 +1,16 @@
 import React from 'react';
 import styled from "styled-components";
-import ButtonMore from "../ButtonMore/ButtonMore";
 
 const PageTitle = (props) => {
 
     const {
         title,
-        options,
         color, // title font color
     } = props;
 
     return (
         <Wrapper>
             <Title color={color}>{title}</Title>
-            <div style={{justifyContent: 'flex-end'}}>
-                <ButtonMore options={options}/>
-            </div>
         </Wrapper>
     )
 };
