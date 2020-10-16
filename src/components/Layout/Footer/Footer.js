@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
-import { Select } from 'antd';
 import Container from "../Container/Container";
 import Images from "../../../assets/image";
-
-const { Option } = Select;
+import Select from "../../Select/Select";
+import {goTo} from "../../../helper/historyHelper";
 
 const Footer = (props) => {
 
@@ -22,14 +21,21 @@ const Footer = (props) => {
                         <LinkItem href={'http://his.pusan.ac.kr/cmmCon/email/view..do'}>이메일무단수집거부</LinkItem>
                     </Links>
                     <SelectWrap>
-                        <Select defaultValue="lucy" style={{ width: 120 }} onChange={handleChange}>
-                            <Option value="jack">Jack</Option>
-                            <Option value="lucy">Lucy</Option>
-                            <Option value="disabled" disabled>
-                                Disabled
-                            </Option>
-                            <Option value="Yiminghe">yiminghe</Option>
-                        </Select>
+                        <Select
+                            options={[
+                                {
+                                    name: '관련사이트 바로가기',
+                                    value: '',
+                                },
+                                {
+                                    name: '부산대학교',
+                                    value: 'http://www.pusan.ac.kr/index.jsp',
+                                },
+                            ]}
+                            defaultValue={'관련사이트 바로가기'}
+                            onChange={(v) => goTo(v)}
+                            style={{width:'160px'}}
+                        />
                         <DemoUi>이동</DemoUi>
                     </SelectWrap>
                 </Top>
