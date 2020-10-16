@@ -1,8 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styled from "styled-components";
-import NavMenu from "./NavMenu";
 import {FiMenu} from "react-icons/all";
 import Button from "../../Button/Button";
+import Menu from "../../Menu/Menu";
 
 const SmallNavbar = (props) => {
 
@@ -12,16 +12,16 @@ const SmallNavbar = (props) => {
     // 이벤트 트리거 타겟 수정
 
     function handleClickOutside(e){
-        const domNode = dom.current;
-
-        // (!domNode || !domNode.contains(e.target)) ? setVisible(false) : setVisible(true)
-        if(!domNode || !domNode.contains(e.target)) {
-            console.log('@@ clicked outside');
-            setVisible(false)
-        } else{
-            console.log('@@ right area?');
-            setVisible(true)
-        }
+        // const domNode = dom.current;
+        //
+        // // (!domNode || !domNode.contains(e.target)) ? setVisible(false) : setVisible(true)
+        // if(!domNode || !domNode.contains(e.target)) {
+        //     console.log('@@ clicked outside');
+        //     setVisible(false)
+        // } else{
+        //     console.log('@@ right area?');
+        //     setVisible(true)
+        // }
     }
 
     useEffect(() => {
@@ -40,7 +40,7 @@ const SmallNavbar = (props) => {
             {
                 visible &&
                 <Screen>
-                    <NavMenu ref={dom} mode={'vertical'}/>
+                    <Menu ref={dom} mode={'inline'}/>
                 </Screen>
             }
         </Wrapper>

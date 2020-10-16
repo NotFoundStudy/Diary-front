@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {Grid} from "antd";
 import SmallNavbar from "./SmallNavbar";
-import NavMenu from "./NavMenu";
+import Shortcuts from "./Shortcuts";
+import Menu from "../../Menu/Menu";
 
 const Header = (props) => {
 
@@ -24,7 +25,14 @@ const Header = (props) => {
             {
                 smallScreen
                     ? <SmallNavbar/>
-                    : <NavMenu/>
+                    : <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems:'flex-end'
+                    }}>
+                        <Shortcuts/>
+                        <Menu/>
+                    </div>
             }
         </Wrapper>
     )

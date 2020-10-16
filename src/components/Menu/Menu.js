@@ -2,11 +2,11 @@ import React from 'react';
 import styled from "styled-components";
 import {Menu as AntdMenu} from 'antd';
 import {AppstoreOutlined} from '@ant-design/icons';
-import {navigate} from "../../../helper/historyHelper";
+import {navigate} from "../../helper/historyHelper";
 
 const {SubMenu} = AntdMenu;
 
-const Sidebar = (props) => {
+const Menu = (props) => {
     const {
         list = [ // sample
             {
@@ -53,6 +53,7 @@ const Sidebar = (props) => {
                 ]
             }
         ],
+        mode = 'horizontal', // vertical | horizontal | inline
         style,
     } = props;
 
@@ -77,7 +78,7 @@ const Sidebar = (props) => {
             // defaultOpenKeys={['sub1']} // sub menu
             // onSelect={(e) => console.log('@@ onSelect', e)} // 로컨스토리지에 저장 & 네브 메뉴에서 학생 눌렀을떄 열려야함
             style={style}
-            mode="inline">
+            mode={mode}>
             {
                 list.map(item =>
                     item.sub_menu.length > 0
@@ -101,8 +102,8 @@ const Sidebar = (props) => {
 };
 
 const StyledMenu = styled(AntdMenu)`
-  width: 256px;
+  ${props => props.mode === 'horizontal' ? 'width: initial;': 'width: 256px;'}
   ${props => props.style && {...props.style}};
 `;
 
-export default Sidebar;
+export default Menu;
