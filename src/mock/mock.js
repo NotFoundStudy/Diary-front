@@ -41,56 +41,5 @@ export const mock = {
                 }
             ]
         },
-        {
-            id:1,
-            title: '[취업] 22현대자동차 연구장학생 선발: 이재효 학생',
-            author: '성동기',
-            created_date:'2020.04.03',
-            modified_date: '2020.08.30',
-            hits: 122,
-            cover: 'https://composite.pusan.ac.kr:443/dext5editordata/2020/09/20200915_150349200_33270.jpg',
-            content: '<p>asdf<p>',
-            attachment: [
-                {
-                    file_id: 'asdf',
-                    name:'atttcccccc.png',
-                    download_url: 'https://',
-                }
-            ]
-        },
-        {
-            id:1,
-            title: '[취업] 22현대자동차 연구장학생 선발: 이재효 학생',
-            author: '성동기',
-            created_date:'2020.04.03',
-            modified_date: '2020.08.30',
-            hits: 122,
-            cover: 'https://composite.pusan.ac.kr:443/dext5editordata/2020/09/20200915_150349200_33270.jpg',
-            content: '<p>asdf<p>',
-            attachment: [
-                {
-                    file_id: 'asdf',
-                    name:'atttcccccc.png',
-                    download_url: 'https://',
-                }
-            ]
-        },
-        {
-            id:1,
-            title: '[취업] 22현대자동차 연구장학생 선발: 이재효 학생',
-            author: '성동기',
-            created_date:'2020.04.03',
-            modified_date: '2020.08.30',
-            hits: 122,
-            cover: 'https://composite.pusan.ac.kr:443/dext5editordata/2020/09/20200915_150349200_33270.jpg',
-            content: '<p>asdf<p>',
-            attachment: [
-                {
-                    file_id: 'asdf',
-                    name:'atttcccccc.png',
-                    download_url: 'https://',
-                }
-            ]
-        }
     ]
 };

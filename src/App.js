@@ -18,6 +18,7 @@ import Gallery from "./pages/Community/Gallery";
 import Notice from "./pages/Community/Notice";
 import Contact from "./pages/Contact/Contact";
 import Layout from "./components/Layout/Layout";
+import Detail from "./components/Post/Card/Detail";
 
 const App = (props) => {
 
@@ -38,7 +39,6 @@ const App = (props) => {
                     <Route path={'/register'} component={Register}/>
                     <Route path={'/login'} component={Login}/>
 
-
                     {/* 구조화 리팩토링 예정 */}
                     {/* url 오타 리다이랙트 리팩토링 예정 */}
 
@@ -49,7 +49,11 @@ const App = (props) => {
                     <Route exact path={'/introduction/professor'} component={Professor}/>
 
                     <Route exact path={'/introduction/people/currentMember'} component={CurrentMember}/>
+                    <Route exact path={'/introduction/people/currentMember/:memberId'} component={CurrentMember}/>
+
                     <Route exact path={'/introduction/people/alumni'} component={Alumni}/>
+                    <Route exact path={'/introduction/people/alumni/:alumniId'} component={Alumni}/>
+
 
                     {/* research */}
                     <Route exact path={'/research'} component={Research}/>

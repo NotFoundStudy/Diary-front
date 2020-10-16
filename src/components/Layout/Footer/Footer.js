@@ -7,10 +7,6 @@ import {goTo} from "../../../helper/historyHelper";
 
 const Footer = (props) => {
 
-    const handleChange = (value) => {
-        console.log(`selected ${value}`);
-    }
-
     return (
         <Wrapper>
             <Container>
@@ -105,7 +101,7 @@ const Text = styled.div`
   p{
     margin: 0;
     line-height: 1.7;
-    font-size: 14px;
+    font-size: 13px;
     color:#868686;
     &.light{
       color:#b7b7b7;
