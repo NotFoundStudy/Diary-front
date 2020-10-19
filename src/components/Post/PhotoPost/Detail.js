@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
 import styled from "styled-components";
-import {mock} from "../../../mock/mock";
 import {Divider} from "antd";
 
 const Detail = (props) => {
 
     const {
+        item
     } = props;
 
     useEffect(()=>{
