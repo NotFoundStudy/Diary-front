@@ -1,18 +1,20 @@
 import React from 'react';
 import styled from "styled-components";
 import RoutePath from "../../RoutePath/RoutePath";
-import Header from "../Navbar";
+import Navbar from "../Navbar";
 import Container from "../Container/Container";
+import Images from "../../../assets/image";
 
 const MainCover = (props) => {
 
     return (
         <Wrapper>
-            <Background>
+            <BackgroundWrap>
                 <Container>
-                    <Header/>
+                    <img src={Images.logoUniversity} alt="" className={'header-logo'}/>
+                    <Navbar layout={'overlay'}/>
                 </Container>
-            </Background>
+            </BackgroundWrap>
             <RoutePathWrap>
                 <Container>
                     <RoutePath/>
@@ -23,11 +25,20 @@ const MainCover = (props) => {
 };
 
 const Wrapper = styled.div`
-  background: pink;
+  position: relative;
+  background: #fff;
+  .header-logo{ // temp
+    height: 70px;
+    margin-top: 30px;
+  }
 `;
 
-const Background = styled.div`
-  height: 250px;
+const BackgroundWrap = styled.div`
+  height: 195px;
+  background-image:url(https://images.unsplash.com/photo-1581091014534-898da33e356e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80);
+  background-position:50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
 `;
 
 const RoutePathWrap = styled.div`

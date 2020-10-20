@@ -3,10 +3,11 @@ import styled from "styled-components";
 
 const Container = (props) => {
 const{
-    children
+    children,
+    style
 } = props;
     return (
-        <Wrapper>
+        <Wrapper style={style}>
             {children}
         </Wrapper>
     )

@@ -1,6 +1,6 @@
 import defaultUser from './default-user.jpg'
-import logoUniversity from './logo_pusanuniv.png';
-import logoComposite from './logo_pusan_composite.png';
+import logoUniversity from './logo_univ.png';
+import logoComposite from './logo_composite.png';
 
 
 const Images = {

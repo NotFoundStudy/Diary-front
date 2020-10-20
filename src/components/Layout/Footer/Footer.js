@@ -71,7 +71,7 @@ const LinkItem = styled.a`
   padding-left: 10px;
   border-left:1px solid #b5b5b5;
   &:first-child{
-    margin-left: 0;
+    //margin-left: 0;
     padding-left: 0;
     border-left: none;
   }
