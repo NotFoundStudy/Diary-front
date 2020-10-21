@@ -18,14 +18,15 @@ const initialState = {
 };
 
 const reducer = {
-    changeInput: (state, { payload: input }) => {
-        const { name, value } = input;
-        state.inputs = {
-            ...state.inputs,
-            [name]: value,
-        };
-    },
+    // changeInput: (state, { payload: input }) => {
+    //     const { name, value } = input;
+    //     state.inputs = {
+    //         ...state.inputs,
+    //         [name]: value,
+    //     };
+    // },
 	loginRequest: (state, { payload }) => {
+        console.log('@@ slice~', payload);
         state.user = {
             ...state.user,
             loading: true,
