@@ -141,7 +141,7 @@ const Wrapper = styled.div`
      position: absolute;
      left: 0;
      right: 0;
-     bottom: 20px;
+     bottom: 50px;
      background:rgba(0,0,0,.43);
      .ant-menu{
         display: flex;

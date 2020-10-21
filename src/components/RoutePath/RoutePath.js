@@ -1,20 +1,39 @@
 import React from 'react';
 import styled from "styled-components";
 import {Breadcrumb} from "antd";
+import {GoLocation} from "react-icons/all";
 
 const RoutePath = (props) => {
 
+    const {
+        list = [
+            {
+                to: '/introduction',
+                name: 'Introduction',
+            },
+            {
+                to: '/people',
+                name: 'People',
+            },
+            {
+                to: '/currentMember',
+                name: 'Current Member',
+            },
+        ]
+    } = props;
+
     return (
         <Wrapper>
-            <Breadcrumb>
-                <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb separator=''>
                 <Breadcrumb.Item>
-                    <a href="">Application Center</a>
+                    <GoLocation/>
                 </Breadcrumb.Item>
-                <Breadcrumb.Item>
-                    <a href="">Application List</a>
-                </Breadcrumb.Item>
-                <Breadcrumb.Item>An Application</Breadcrumb.Item>
+                {
+                    list.map(item => <Breadcrumb.Item key={item.to}>
+                            <a href={item.to}>{item.name}</a>
+                        </Breadcrumb.Item>
+                    )
+                }
             </Breadcrumb>
         </Wrapper>
     )
@@ -22,6 +41,35 @@ const RoutePath = (props) => {
 
 const Wrapper = styled.div`
   background:#f1f1f1;
+  .ant-breadcrumb {
+    font-size: 0;
+    > span { // .ant-breadcrumb span span.ant-breadcrumb-link a
+      .ant-breadcrumb-link {
+         display: inline-block;
+         vertical-align: middle;
+         border-right: 1px solid #cacaca;               
+         padding: 12px 15px;
+         a {
+           font-size: 17px;
+           color:#555;
+         }
+      }
+      &:first-child{
+        .ant-breadcrumb-link{
+          padding: 12px 7px;
+          font-size: 17px;
+          border-left: 1px solid #cacaca;               
+          svg{
+            position: relative;
+            top: 2px;
+          }
+        }
+      }
+      &:last-child .ant-breadcrumb-link a {
+        color:#1d7fe2;
+      }
+    }
+  }
 `;
 
 export default RoutePath;

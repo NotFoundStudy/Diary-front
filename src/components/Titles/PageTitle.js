@@ -17,15 +17,19 @@ const PageTitle = (props) => {
 
 const Wrapper = styled.div`
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  padding: 25px 25px;
+  width: 100%;
+  margin-bottom: 40px;
 `;
 
-const Title = styled.div`
+const Title = styled.span`
+  padding-bottom: 15px;
+  border-bottom: 3px solid #2d2d2d;
   text-transform: capitalize;
-  font-size: 18px;
-  font-weight: 800;
-  color: ${props => props.color || '#fff'};
+  font-size: 37px;
+  font-weight: 600;
+  color: ${props => props.color || '#2d2d2d'};
 `;
 
 

@@ -8,6 +8,9 @@ const {SubMenu} = AntdMenu;
 
 const Menu = (props) => {
     const {
+        mode = 'horizontal', // vertical | horizontal | inline
+        style,
+        className,
         list = [ // sample
             {
                 key: '/introduction',
@@ -53,8 +56,6 @@ const Menu = (props) => {
                 ]
             }
         ],
-        mode = 'horizontal', // vertical | horizontal | inline
-        style,
     } = props;
 
     // localstorage등 에서 가져와서 하기 defaultSelcted등 세팅(여기서 하기)
@@ -77,8 +78,10 @@ const Menu = (props) => {
             // defaultSelectedKeys={['1']} // unit depth menu
             // defaultOpenKeys={['sub1']} // sub menu
             // onSelect={(e) => console.log('@@ onSelect', e)} // 로컨스토리지에 저장 & 네브 메뉴에서 학생 눌렀을떄 열려야함
+            mode={mode}
+            className={className}
             style={style}
-            mode={mode}>
+            >
             {
                 list.map(item =>
                     item.sub_menu.length > 0
