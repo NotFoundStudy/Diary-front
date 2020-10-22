@@ -1,99 +1,99 @@
-import React, {useState} from 'react';
-import styled from "styled-components";
-import {navigate} from "../../helper/historyHelper";
+import React from 'react';
+import styled from 'styled-components';
+import {Form, Input, Button, Steps} from 'antd';
+import {useSelector, useDispatch} from 'react-redux';
+import {selector as appSelector} from '../../redux/app/selector';
+import {Action as AppAction} from '../../redux/app/slice';
+import PageTitle from "../../components/Titles/PageTitle";
+import Step1 from "./step1/Step1";
+import Step3 from "./step3/Step3";
+import Step2 from "./step2/Step2";
+
+const { Step } = Steps;
 
 const Register = (props) => {
+    const dispatch = useDispatch();
 
-    // login.js 카피본 => ui 재구성 필요
+    // const { user, inputs } = useSelector(appSelector.all);
+    // const { email, password } = inputs;
 
-    const [id, setId] = useState('');
-    const [pw, setPw] = useState('');
+    const onFinish = (values) => {
+        console.log('Success:', values);
+        dispatch(AppAction.loginRequest(values));
+    };
+
+    // trigger after submitting the form and verifying data failed
+    const onFinishFailed = errorInfo => {
+        console.log('Failed:', errorInfo);
+        dispatch(AppAction.loginFail(errorInfo));
+    };
 
     return (
         <Wrapper>
-            <Top>
-                <TopText>Register</TopText>
-            </Top>
-            <AppSlogan>
-                <p>Lorem ipsum dolor sit amet, consectetur</p>
-                <p>adipisicing elit. Ipsam, pariatur?</p>
-            </AppSlogan>
+            <PageTitle title={'회원가입'}/>
 
-            <Input type={'text'}
-                   placeholder={'ID'}
-                   value={id}
-                   onChange={(e) => setId(e.target.value)}/>
-            <Input type={'text'}
-                   placeholder={'PASSWORD'}
-                   value={pw}
-                   onChange={(e) => setPw(e.target.value)}/>
 
-            <ButtonSend onClick={()=>{}}>Register</ButtonSend>
+            {/* validate => current 값 */}
+            <Steps current={1}>
+                <Step title="1 단계" description="조항 동의" />
+                <Step title="2 단계" description="학생 인증" />
+                <Step title="3 단계" description="정보 입력" />
+            </Steps>
+
+            <Step1/>
+            <Step2/>
+            <Step3/>
+
+            {/*<Form*/}
+            {/*    name="basic"*/}
+            {/*    onFinish={onFinish}*/}
+            {/*    onFinishFailed={onFinishFailed}>*/}
+            {/*    <Form.Item*/}
+            {/*        name="email"*/}
+            {/*        rules={[*/}
+            {/*            {required: true, message: '이메일은 필수 입력값 입니다.'},*/}
+            {/*            {pattern: /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i, message: '유효하지 않은 형식 입니다.'}*/}
+            {/*        ]}>*/}
+            {/*        <Input placeholder={'이메일'}/>*/}
+            {/*    </Form.Item>*/}
+            {/*    <Form.Item*/}
+            {/*        name="password"*/}
+            {/*        rules={[*/}
+            {/*            {required: true, message: '비밀번호는 필수 입력값 입니다.'},*/}
+            {/*            {pattern: /^[A-Za-z0-9]{6,12}$/, message: '비밀번호는 숫자와 문자 포함 형태의 6~12자리입니다.'},*/}
+            {/*        ]}>*/}
+            {/*        <Input.Password placeholder={'비밀번호'}/>*/}
+            {/*    </Form.Item>*/}
+
+            {/*    <Form.Item>*/}
+            {/*        <Button type="primary" htmlType="submit">*/}
+            {/*            로그인*/}
+            {/*        </Button>*/}
+            {/*    </Form.Item>*/}
+            {/*</Form>*/}
+
+            {/*<Helps>*/}
+            {/*    <div onClick={() => navigate('find/id')}>아이디 찾기</div>*/}
+            {/*    <div onClick={() => navigate('find/pw')}>비밀번호 찾기</div>*/}
+            {/*</Helps>*/}
         </Wrapper>
-    )
+    );
 };
 
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`;
-const Top = styled.div`
-  width: 100%;
-  padding: 20px 15px;
-  background:#08c;
-`;
-const TopText = styled.div`
-  font-size: 17px;
-  font-weight: 400;
-  color:#fff;
-`;
-const AppSlogan = styled.div`
-  margin: 50px 0;
-  text-align: center;
-`;
-
-const Input = styled.input`
-  width: 50%;
-  height: 56px;
-  border-radius: 10px;
-  border:1px solid #d4d4d4;
-  padding: 5px 18px;
-  font-size: 15px;
-  font-weight: 400;
-  color:#000;
-  &+ &{
-    margin-top: 10px;
-  }
-`;
-const ButtonSend = styled.div`
-  display: inline-flex;
-  width: 50%;
-  justify-content: center;
-  align-items: center;
-  margin-top: 40px;
-  border-radius: 25px;
-  padding: 18px 15px;
-  background:#08c;
-  cursor:pointer;
-  font-size: 17px;
-  font-weight: 400;
-  color:#fff;
-`;
-
-const Helps = styled.div`
-  display: flex;
-  justify-content: center; 
-  margin-top: 20px;
-  > div {
-    margin-left: 15px;
-    text-decoration: underline;
-    font-size: 13px;
-    color:#999;
-    cursor:pointer;
-    &:nth-child(1){
-      margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    .ant-form-item{
+      margin-bottom: 7px;
     }
-  }
+    .ant-input-affix-wrapper{
+        padding: 0 11px;
+    }
+    .ant-input{
+        height: 38px;
+    }
+    .ant-input-affix-wrapper, .ant-input{
+      border-radius: 0;
+    }
 `;
 export default Register;
