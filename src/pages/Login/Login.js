@@ -9,18 +9,17 @@ import PageTitle from "../../components/Titles/PageTitle";
 const Login = (props) => {
     const dispatch = useDispatch();
 
-    // const { user, inputs } = useSelector(appSelector.all);
-    // const { email, password } = inputs;
+    const [form] = Form.useForm();
 
-    const onFinish = (values) => {
-        console.log('Success:', values);
-        dispatch(AppAction.loginRequest(values));
-    };
-
-    // trigger after submitting the form and verifying data failed
-    const onFinishFailed = errorInfo => {
-        console.log('Failed:', errorInfo);
-        dispatch(AppAction.loginFail(errorInfo));
+    const onSubmit = async () => {
+        try {
+            const values = await form.validateFields();
+            console.log('Success:', values);
+            // dispatch(AppAction.loginRequest(values));
+        } catch (errorInfo) {
+            console.log('Failed:', errorInfo);
+            // dispatch(AppAction.loginFail(errorInfo));
+        }
     };
 
     return (
@@ -28,32 +27,37 @@ const Login = (props) => {
             <PageTitle title={'로그인'}/>
 
             학번 또는 교직원 번호로 로그인해주세요.
+            (추가 스타일링 예정)
 
             <Form
-                name="basic"
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}>
+                form={form}
+                name="login"
+                layout="vertical">
                 <Form.Item
                     name="email"
+                    label={'이메일'}
                     rules={[
                         {required: true, message: '이메일은 필수 입력값 입니다.'},
-                        {pattern: /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i, message: '유효하지 않은 형식 입니다.'}
-                    ]}>
+                        {type: 'email', message: '예) aaa@university.com'}
+                    ]}
+                    colon={false}>
                     <Input placeholder={'이메일'}/>
                 </Form.Item>
                 <Form.Item
                     name="password"
+                    label={'비밀번호'}
                     rules={[
                         {required: true, message: '비밀번호는 필수 입력값 입니다.'},
                         {pattern: /^[A-Za-z0-9]{6,12}$/, message: '비밀번호는 숫자와 문자 포함 형태의 6~12자리입니다.'},
-                        ]}>
+                        ]}
+                    colon={false}>
                     <Input.Password placeholder={'비밀번호'}/>
                 </Form.Item>
 
                 <Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <SubmitButton htmlType={'submit'} onClick={onSubmit} type={'primary'} block>
                         로그인
-                    </Button>
+                    </SubmitButton>
                 </Form.Item>
             </Form>
 
@@ -66,10 +70,8 @@ const Login = (props) => {
 };
 
 const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
     .ant-form-item{
-      margin-bottom: 7px;
+      margin-bottom: 17px;
     }
     .ant-input-affix-wrapper{
         padding: 0 11px;
@@ -80,5 +82,18 @@ const Wrapper = styled.div`
     .ant-input-affix-wrapper, .ant-input{
       border-radius: 0;
     }
+`;
+
+const SubmitButton = styled(Button)`
+  height: 45px;
+  margin-top: 15px;
+  background:#444;
+  border-color:#444;
+  line-height: initial;
+  font-size: 17px;
+  &:hover, &:focus{
+    background:#585858;
+    border-color:#585858;
+  }
 `;
 export default Login;
