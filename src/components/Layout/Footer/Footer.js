@@ -98,6 +98,7 @@ const Bottom = styled.div`
   padding: 13px 0;
 `;
 const Text = styled.div`
+  padding-left: 10px;
   p{
     margin: 0;
     line-height: 1.7;

@@ -85,20 +85,28 @@ const Wrapper = styled.div`
 const StyledMenu = styled(Menu)`
   &.ant-menu{
     border-right: initial;
-    li {
-      height: 55px;
-      line-height: 55px;
-      font-size: 16px;
-      font-weight: 400;
-      color:#777;
-      border-bottom:1px solid #f1f1f1;
-      &.ant-menu-item .ant-menu-item-only-child {
+    &.ant-menu-sub {
+      > li{
+        padding-top: 10px;
+        padding-bottom: 10px;
         color:#6c6c6c;
       }
     }
     .ant-menu-submenu-inline > .ant-menu-submenu-title {
       .ant-menu-submenu-arrow::before, .ant-menu-submenu-arrow::after{
           background:#999;
+      }
+    }
+    li { // ant-menu-item
+      height: 55px;
+      margin: 0;
+      line-height: 53px;
+      font-size: 16px;
+      font-weight: 400;
+      color:#777;
+      border-bottom:1px solid #f1f1f1;
+      &:first-child{
+        border-top:1px solid #f1f1f1;
       }
     }
   }
