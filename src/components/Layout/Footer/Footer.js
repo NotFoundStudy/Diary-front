@@ -60,6 +60,7 @@ const Top = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 14px;
   border-top:1px solid #ddd;
   border-bottom:1px solid #ddd;
 `;
@@ -71,7 +72,7 @@ const LinkItem = styled.a`
   padding-left: 10px;
   border-left:1px solid #b5b5b5;
   &:first-child{
-    //margin-left: 0;
+    margin-left: 0;
     padding-left: 0;
     border-left: none;
   }
@@ -95,10 +96,9 @@ const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 13px 0;
+  padding: 13px 10px;
 `;
 const Text = styled.div`
-  padding-left: 10px;
   p{
     margin: 0;
     line-height: 1.7;

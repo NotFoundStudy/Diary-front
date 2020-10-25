@@ -47,18 +47,18 @@ const Wrapper = styled.div`
       .ant-breadcrumb-link {
          display: inline-block;
          vertical-align: middle;
-         border-right: 1px solid #cacaca;               
-         padding: 12px 15px;
+         border-right: 1px solid #dedede;               
+         padding: 12px 18px;
          a {
            font-size: 17px;
-           color:#555;
+           color:#676767;
          }
       }
       &:first-child{
         .ant-breadcrumb-link{
           padding: 12px 7px;
           font-size: 17px;
-          border-left: 1px solid #cacaca;               
+          border-left: 1px solid #dedede;               
           svg{
             position: relative;
             top: 2px;

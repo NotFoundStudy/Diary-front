@@ -4,7 +4,7 @@ import {FiMenu} from "react-icons/all";
 import Button from "../../Button/Button";
 import Menu from "../../Menu/Menu";
 
-const SmallNavbar = (props) => {
+const DropdownNavbar = (props) => {
 
     const dom = useRef(null);
     const [visible, setVisible] = useState(false);
@@ -62,4 +62,4 @@ const Screen = styled.div`
   bottom: 0;
 `;
 
-export default SmallNavbar;
+export default DropdownNavbar;

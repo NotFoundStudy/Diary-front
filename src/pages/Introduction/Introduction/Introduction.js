@@ -17,6 +17,7 @@ const Introduction = (props) => {
         <Wrapper>
            <PageTitle title={'Introduction'}/>
            <RightWrap>
+               {/* 로그인 role에 따라 */}
                <Button>등록/수정</Button>
            </RightWrap>
             <Viewer initialValue={mock.viewerHtml}/>

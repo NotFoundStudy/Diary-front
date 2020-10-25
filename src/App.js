@@ -59,6 +59,7 @@ const App = (props) => {
 
                     {/* lecture */}
                     <Route exact path={'/lecture'} component={Lecture}/>
+                    <Route exact path={'/lecture/:name'} component={Lecture}/>
 
                     {/* community */}
                     <Route exact path={'/community/gallery'} component={Gallery}/>

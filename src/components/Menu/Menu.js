@@ -107,6 +107,19 @@ const Menu = (props) => {
 const StyledMenu = styled(AntdMenu)`
   ${props => props.mode === 'horizontal' ? 'width: initial;': 'width: 256px;'}
   ${props => props.style && {...props.style}};
+  
+  &.ant-menu-inline{
+    .ant-menu-submenu-title{
+      height: 55px;
+      margin-bottom: -1px;
+      padding-top: 7px; 
+    }
+    .ant-menu-item {
+      height: 55px;
+      margin-bottom: 0;
+      line-height: 55px;
+    }
+  }
 `;
 
 export default Menu;
