@@ -85,5 +85,5 @@ const slice = createSlice({
 });
 
 export const Name = slice.name;
-export const Reducer = slice.reducer;
+export const Reducer = slice.reducers;
 export const Action = slice.actions;

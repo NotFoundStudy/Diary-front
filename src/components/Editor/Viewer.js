@@ -1,26 +1,27 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-// import 'codemirror/lib/codemirror.css';
-// import '@toast-ui/editor/dist/toastui-editor.css';
-import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 
-import Viewer from '@toast-ui/editor/dist/toastui-editor-viewer';
-
-// https://github.com/nhn/tui.editor/blob/master/apps/editor/docs/viewer.md
+import 'tui-editor/dist/tui-editor-contents.css';
+// import 'highlight.js/styles/github.css';
+import TuiViewer from 'tui-editor/dist/tui-editor-Viewer';
 
 const Viewer = (props) => {
 
-    // const viewer = new Viewer({
-    //     el: document.querySelector('#viewer'),
-    //     height: '600px',
-    //     initialValue: '# hello'
-    // });
-    //
-    // viewer.getHtml();
+    const [viewerEl, setViewerEl] = useState(null);
+
+    useEffect(() => {
+        setViewerEl(
+            new TuiViewer({
+                el: document.querySelector('#viewerSection'),
+                height: '500px',
+                initialValue: '# content to be rendered'
+            }))
+        // instance.getHtml();
+    }, [])
 
     return (
         <Wrapper>
-           <Viewer/>
+            <div id="viewerSection"></div>
         </Wrapper>
     )
 };

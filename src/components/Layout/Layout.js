@@ -63,7 +63,10 @@ const Layout = (props) => {
                         !screens.xs &&
                         <Col flex={'100px'}>
                             <MenuHead>{menuHead}</MenuHead>
-                            <StyledMenu mode={'inline'} list={menuList}/>
+                            <StyledMenu list={menuList}
+                                        mode={'inline'}
+                                        subMenuOpenDelay={0}
+                            />
                         </Col>
                     }
                     <Col style={{flexGrow:1}}>

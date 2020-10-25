@@ -17,7 +17,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "redux-devtools-extension": "^2.13.8",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "tui-editor": "^1.4.10"
   },
   "scripts": {
     "start": "react-scripts start",

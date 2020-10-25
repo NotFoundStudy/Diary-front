@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Tabs,Table, Tag, Space,Collapse  } from 'antd';
 
 const { TabPane } = Tabs;
-const { Panel } = Collapse;
 
 const text = `
   A dog is a type of domesticated animal.
@@ -13,9 +12,9 @@ const text = `
 
 const columns = [
     {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
+        title: '2018 YEARS',
+        dataIndex: 'year',
+        key: 'year',
         render: text => <a>{text}</a>,
     },
     {
@@ -69,7 +68,7 @@ const columns = [
 const data = [
     {
         key: '1',
-        name: 'John Brown',
+        year: '2018 YEARS',
         age: 32,
         address: 'New York No. 1 Lake Park',
         tags: ['nice', 'developer'],
@@ -113,17 +112,7 @@ const Tab = (props) => {
             <Table columns={columns} dataSource={data} />
 
             {/* Table data 요소로 - 공동저자정보 */}
-            <Collapse defaultActiveKey={['1']} ghost>
-                <Panel header="This is panel header 1" key="1">
-                    <p>{text}</p>
-                </Panel>
-                <Panel header="This is panel header 2" key="2">
-                    <p>{text}</p>
-                </Panel>
-                <Panel header="This is panel header 3" key="3">
-                    <p>{text}</p>
-                </Panel>
-            </Collapse>
+
         </Wrapper>
     )
 };

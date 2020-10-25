@@ -23,6 +23,79 @@ export const mock = {
             field_eng: 'Manufacturing process of composite materials'
         }
     ],
+    publication: [
+        {
+            category: '논문',
+            data: [
+                {
+                    published_year: '2020',
+                    books: [
+                        {
+                            description: '2222Effect of caprolactam modified phenoxy-based sizing material on reactive process of carbon fiber-reinforced thermoplastic polyamide-6',
+                            reference: 'COMPOSITES PART A-APPLIED SCIENCE AND MANUFACTURING, ELSEVIER SCI LTD, 2020-10',
+                            authors: [
+                                {
+                                    name: '성동기', // 성명
+                                    position: '조교수', // 직급명
+                                    university: '부산대학교', //대학
+                                    major: '응용학과', // 학과
+                                    role:'공동(참여)-내부', // 연구원구분
+                                    role_number: '409' // 참여구분
+                                },
+                                {
+                                    name: '김상우',
+                                    position: '조교수',
+                                    university: '부산대학교',
+                                    major: '응용학과',
+                                    role:'공동(참여)-내부',
+                                    role_number: '409'
+                                },
+                                {
+                                    name: '박태훈',
+                                    position: '조교수',
+                                    university: '부산대학교',
+                                    major: '응용학과',
+                                    role:'공동(참여)-내부',
+                                    role_number: '409'
+                                },
+                            ]
+                        },
+                        {
+                            description: '1111Effect of caprolactam modified phenoxy-based sizing material on reactive process of carbon fiber-reinforced thermoplastic polyamide-6',
+                            reference: 'COMPOSITES PART A-APPLIED SCIENCE AND MANUFACTURING, ELSEVIER SCI LTD, 2020-10',
+                            authors: [
+                                {
+                                    name: '성동기', // 성명
+                                    position: '조교수', // 직급명
+                                    university: '부산대학교', //대학
+                                    major: '응용학과', // 학과
+                                    role:'공동(참여)-내부', // 연구원구분
+                                    role_number: '409' // 참여구분
+                                },
+                                {
+                                    name: '김상우',
+                                    position: '조교수',
+                                    university: '부산대학교',
+                                    major: '응용학과',
+                                    role:'공동(참여)-내부',
+                                    role_number: '409'
+                                },
+                                {
+                                    name: '박태훈',
+                                    position: '조교수',
+                                    university: '부산대학교',
+                                    major: '응용학과',
+                                    role:'공동(참여)-내부',
+                                    role_number: '409'
+                                },
+                            ]
+                        }
+                    ]
+
+                },
+            ]
+        }
+    ],
     gallery:[
         {
             id:0,

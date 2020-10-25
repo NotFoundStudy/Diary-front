@@ -7,7 +7,7 @@ import Page404 from "./pages/Error/Page404";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
-import Introduction from "./pages/Introduction/Introduction";
+import Introduction from "./pages/Introduction/Introduction/Introduction";
 import Professor from "./pages/Introduction/Professor";
 import CurrentMember from "./pages/Introduction/CurrentMember";
 import Alumni from "./pages/Introduction/Alumni";
@@ -19,21 +19,14 @@ import Notice from "./pages/Community/Notice";
 import Contact from "./pages/Contact/Contact";
 import Layout from "./components/Layout/Layout";
 import Detail from "./components/Post/Card/Detail";
+import Write from "./pages/Research/Write";
+import IntroductionWrite from "./pages/Introduction/Introduction/IntroductionWrite";
+import Viewer from "./components/Editor/Viewer";
 
 const App = (props) => {
 
-    // toastMessage redux-slice 구조로 리팩토링 예정
-    const {
-        toastMessage
-    } = useSelector(state => state.app);
-
-
     return (
         <Wrapper>
-            {
-                toastMessage && <ToastMessage message={toastMessage}/>
-            }
-
             <Layout>
                 <Switch>
                     <Route path={'/user/regist/input'} component={Register}/>
@@ -42,11 +35,13 @@ const App = (props) => {
                     {/* 구조화 리팩토링 예정 */}
                     {/* url 오타 리다이랙트 리팩토링 예정 */}
 
-                    <Route exact path={'/'} component={Home}/>
+                    <Route exact path={'/'} component={Viewer}/>
 
                     {/* introduction */}
                     <Route exact path={'/introduction'} component={Introduction}/>
+                    <Route exact path={'/introduction/write'} component={IntroductionWrite}/>
                     <Route exact path={'/introduction/professor'} component={Professor}/>
+                    <Route exact path={'/introduction/professor/write'} component={Professor}/>
 
                     <Route exact path={'/introduction/people/currentMember'} component={CurrentMember}/>
                     <Route exact path={'/introduction/people/currentMember/:memberId'} component={CurrentMember}/>
