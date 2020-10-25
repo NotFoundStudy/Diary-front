@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
-import List from "../../components/Post/PhotoPost/List";
-import {mock} from "../../mock/mock";
+import List from "../../../components/Post/PhotoPost/List";
+import {mock} from "../../../mock/mock";
 
 const CurrentMember = (props) => {
 
