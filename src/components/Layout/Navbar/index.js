@@ -23,7 +23,7 @@ const menuList = [
             {
                 key: '/introduction/people/currentMember',
                 icon: '',
-                name: 'Current Member',
+                name: 'Current Members',
             },
             {
                 key: '/introduction/people/alumni',
