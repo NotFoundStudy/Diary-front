@@ -1,4 +1,4 @@
-import { createSelector } from '@reduxjs/toolkit';
+import {createSelector} from '@reduxjs/toolkit';
 
 // state getter method
 const getSideMenu = (state) => state.menu.sideMenu;
@@ -7,10 +7,8 @@ const getToastMessage = (state) => state.menu.toastMessage;
 
 const selectAllState = createSelector(
     getSideMenu,
-    getLoad,
-    getToastMessage,
-    ( user, load, toastMessage ) => {
-        return { user, load, toastMessage };
+    (sideMenu) => {
+        return {sideMenu};
     }
 );
 

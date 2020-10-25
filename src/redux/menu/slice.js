@@ -5,7 +5,7 @@ const name = 'Menu';
 
 const initialState = {
     sideMenu: { // dummy
-        head: 'menuHead',
+        head: 'menuHead22',
         list: [
             {
                 key: '/introduction',

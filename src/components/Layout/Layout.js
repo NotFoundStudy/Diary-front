@@ -7,6 +7,8 @@ import {Col, Grid, Row} from "antd";
 import Container from "./Container/Container";
 import DropdownNavbar from "./Navbar/DropdownNavbar";
 import Sidebar from "./Sidebar/Sidebar";
+import {useDispatch, useSelector} from "react-redux";
+import {selector as menuSelector} from "../../redux/menu/selector";
 
 const Layout = (props) => {
 
@@ -16,41 +18,10 @@ const Layout = (props) => {
 
     const screens = Grid.useBreakpoint();
     const [rwdVisible, setRwdVisible] = useState(false);
+    const dispatch = useDispatch();
+    const { sideMenu } = useSelector(menuSelector.all);
 
-    const sideMenuList = { // selector
-        head: 'menuHead',
-        list: [
-            {
-                key: '/introduction',
-                icon: '',
-                name: 'Introduction',
-                sub_menu: []
-            },
-            {
-                key: '/introduction/professor',
-                icon: '',
-                name: 'Professor',
-                sub_menu: []
-            },
-            {
-                key: '/introduction/people',
-                icon: '',
-                name: 'People',
-                sub_menu: [
-                    {
-                        key: '/introduction/people/currentMember',
-                        icon: '',
-                        name: 'currentMember',
-                    },
-                    {
-                        key: '/introduction/people/alumni',
-                        icon: '',
-                        name: 'alumni',
-                    },
-                ]
-            }
-        ]
-    }
+
 
     return (
         <Wrapper>
@@ -61,7 +32,7 @@ const Layout = (props) => {
                     <Container style={{padding: '50px 0 90px'}}>
                         <Row gutter={34} justify={'center'} style={{minHeight: 'calc(100vh - 400px)'}}>
                             <Col flex={'100px'}>
-                               <Sidebar list={sideMenuList}/>
+                               <Sidebar list={sideMenu}/>
                             </Col>
                             <Col style={{flexGrow: 1}}>
                                 {children}
