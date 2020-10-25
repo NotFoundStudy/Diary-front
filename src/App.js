@@ -8,9 +8,9 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import Introduction from "./pages/Introduction/Introduction/Introduction";
-import Professor from "./pages/Introduction/Professor";
-import CurrentMember from "./pages/Introduction/CurrentMember";
-import Alumni from "./pages/Introduction/Alumni";
+import Professor from "./pages/Introduction/Professor/Professor";
+import CurrentMember from "./pages/Introduction/CurrentMember/CurrentMember";
+import Alumni from "./pages/Introduction/Alumni/Alumni";
 import Research from "./pages/Research/Research";
 import Publication from "./pages/Publication/Publication";
 import Lecture from "./pages/Lecture/Lecture";
@@ -22,6 +22,7 @@ import Detail from "./components/Post/Card/Detail";
 import Write from "./pages/Research/Write";
 import IntroductionWrite from "./pages/Introduction/Introduction/IntroductionWrite";
 import Viewer from "./components/Editor/Viewer";
+import ProfessorWrite from "./pages/Introduction/Professor/ProfessorWrite";
 
 const App = (props) => {
 
@@ -41,7 +42,7 @@ const App = (props) => {
                     <Route exact path={'/introduction'} component={Introduction}/>
                     <Route exact path={'/introduction/write'} component={IntroductionWrite}/>
                     <Route exact path={'/introduction/professor'} component={Professor}/>
-                    <Route exact path={'/introduction/professor/write'} component={Professor}/>
+                    <Route exact path={'/introduction/professor/write'} component={ProfessorWrite}/>
 
                     <Route exact path={'/introduction/people/currentMember'} component={CurrentMember}/>
                     <Route exact path={'/introduction/people/currentMember/:memberId'} component={CurrentMember}/>

@@ -7,14 +7,19 @@ import TuiViewer from 'tui-editor/dist/tui-editor-Viewer';
 
 const Viewer = (props) => {
 
+    const {
+        initialValue,
+    } = props;
+
+    // viewer instance to custom sth
     const [viewerEl, setViewerEl] = useState(null);
 
     useEffect(() => {
-        setViewerEl(
+       setViewerEl(
             new TuiViewer({
                 el: document.querySelector('#viewerSection'),
                 height: '500px',
-                initialValue: '# content to be rendered'
+                initialValue: initialValue
             }))
         // instance.getHtml();
     }, [])
