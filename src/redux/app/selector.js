@@ -2,16 +2,34 @@ import { createSelector } from '@reduxjs/toolkit';
 
 // state getter method
 const getUser = (state) => state.app.user;
-const getInputs = (state) => state.app.inputs;
+const getLoad = (state) => state.app.load;
+const getToastMessage = (state) => state.app.toaseMessage;
 
 const selectAllState = createSelector(
     getUser,
-    getInputs,
-    ( user, inputs ) => {
-        return { user, inputs };
+    getLoad,
+    getToastMessage,
+    ( user, load, toastMessage ) => {
+        return { user, load, toastMessage };
     }
 );
 
+const selectUserState = createSelector(
+    getUser,
+    (user) => {
+        return {user};
+    }
+)
+
+const selectLoadState = createSelector(
+    getLoad,
+    (load) => {
+        return {load};
+    }
+)
+
 export const selector = {
     all: selectAllState,
+    user : selectUserState,
+    load : selectLoadState,
 };

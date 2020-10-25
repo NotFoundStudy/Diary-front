@@ -9,10 +9,12 @@ import 'antd/dist/antd.css';
 import App from './App';
 
 ReactDOM.render(
+    <React.StrictMode>
       <Provider store={store}>
           <Router history={HISTORY}>
               <App />
           </Router>
-      </Provider>,
+      </Provider>
+    </React.StrictMode>,
   document.getElementById('root')
 );

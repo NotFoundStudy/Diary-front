@@ -3,13 +3,17 @@ import {Action as appAction} from './slice';
 import {getAccessToken, setAccessToken} from '../../helper/tokenHelper';
 import {navigate} from '../../helper/historyHelper';
 
-function* authorize(email, password) {
+
+function* loginAuthorize(userInfo) {
     const {loginSuccess, loginFail} = appAction;
+    const {email, password, name, accessToken} = userInfo;
+
     try { // yield call(Api.authorize, email, password);
         const user = {
-            email: '00ghks22@naver.com',
-            nickname: 'gorillaKim',
-            accessToken: 'accessToken',
+            email,
+            password,
+            name,
+            accessToken,
         };
         yield put(loginSuccess(user));
         const {accessToken} = user
@@ -17,19 +21,46 @@ function* authorize(email, password) {
     } catch (error) {
         yield put(loginFail(error));
         setAccessToken('');
-        navigate('/');
+        // navigate('/');
     }
 }
 
-export default function* loginFlow() {
+function* registFlow() {
+    try{
+        const {registRequest} = appAction;
+        const {payload : userInfo} = yield take(registRequest().type);
+        //regist API    
+        // const [status, {data}] = yield call(registApi, payload)
+        // yield put(Action.success())
+    }catch(e){
+        // yield put(Action.fail())
+    }
+    
+    
+
+}
+
+function* loginFlow() {
     const {loginRequest, logout} = appAction;
 
     while (true) {
-        const {payload} = yield take(loginRequest().type);
-        const {email, password} = payload;
-        yield fork(authorize, email, password);
-        yield take(logout().type);
-        setAccessToken('');
-        navigate('/');
+        try{
+            const {payload : userInfo} = yield take(loginRequest().type);
+            yield fork(loginAuthorize, userInfo);
+            
+            //login API
+            // const [status, {data}] = yield call(loginApi, payload)
+
+            // yield take(logout().type);
+            setAccessToken('');
+            // navigate('/'); route 부분은 action에서 하는게 나을듯?
+            // yield put(Action.success())
+        }catch(e){
+            // yield put(Action.fail());
+        }
+        
     }
 }
+
+export const regist = registFlow;
+export const login = loginFlow;

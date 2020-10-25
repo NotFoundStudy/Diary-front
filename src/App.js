@@ -36,7 +36,7 @@ const App = (props) => {
 
             <Layout>
                 <Switch>
-                    <Route path={'/register'} component={Register}/>
+                    <Route path={'/user/regist/input'} component={Register}/>
                     <Route path={'/login'} component={Login}/>
 
                     {/* 구조화 리팩토링 예정 */}

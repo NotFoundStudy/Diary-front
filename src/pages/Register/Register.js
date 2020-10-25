@@ -1,22 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Form, Input, Button, Steps, Mentions, Checkbox,} from 'antd';
-import {useSelector, useDispatch} from 'react-redux';
-import {selector as appSelector} from '../../redux/app/selector';
-import {Action as AppAction} from '../../redux/app/slice';
+import { useHistory } from "react-router-dom";
+import BasicInfoConstants from '../../constants/basicInfo'
+
+import { Form, Input, Button, Steps, Mentions, Checkbox, } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { selector as appSelector } from '../../redux/app/selector';
+import { Action } from '../../redux/app/slice';
 import PageTitle from "../../components/Titles/PageTitle";
 
-const {Search} = Input;
+const { Search } = Input;
 
 const Register = (props) => {
 
-    const [form] = Form.useForm();
-
+    const [ form ] = Form.useForm();
     const dispatch = useDispatch();
+    const {changeUserInfo, registRequest} = Action;
 
+    // const {user} = selector;
+
+    const userInfoDispatcher = (name, value) => {
+        dispatch(changeUserInfo({name, value}));
+    }
+
+    //async 주의
     const onSubmit = async () => {
         try {
             const values = await form.validateFields();
+            // const {}
             console.log('Success:', values);
             // dispatch(AppAction.registerRequest(values));
         } catch (errorInfo) {
@@ -25,19 +36,40 @@ const Register = (props) => {
         }
     };
 
+    const onChangeEmail = (e) => {
+        const {value} = e.target;
+        const {email} = BasicInfoConstants;
+
+        userInfoDispatcher(email.id, value);
+    }
+
+    const onChangePassword = (e) => {
+        const {value} = e.target;
+        const {password} = BasicInfoConstants
+
+        userInfoDispatcher(password.id, value);
+    }
+
+    const onChangeName = (e) => {
+        const {value} = e.target;
+        const {name} = BasicInfoConstants;
+
+        userInfoDispatcher(name.id, value);
+    }
+
     return (
         <Wrapper>
-            <PageTitle title={'회원가입'}/>
+            <PageTitle title={'회원가입'} />
 
             <Form
                 form={form}
                 name={'step1'}
-                initialValues={{'clause1': false,}}
+                initialValues={{ 'clause1': false, }}
                 layout="vertical">
 
                 {/* no need <Form.Item> wrapper*/}
                 <Mentions rows="15"
-                          value="약관을 입력해주세요."/>
+                    value="약관을 입력해주세요." />
                 <Form.Item
                     name={'clause1'}
                     valuePropName="checked"
@@ -47,7 +79,7 @@ const Register = (props) => {
                                 value ? Promise.resolve() : Promise.reject('필수 동의 항목입니다.')
                         }
                     ]}
-                    style={{marginBottom: '30px'}}>
+                    style={{ marginBottom: '30px' }}>
                     <Checkbox>위 약관에 동의합니다.</Checkbox>
                 </Form.Item>
 
@@ -55,20 +87,39 @@ const Register = (props) => {
                     name={'email'}
                     label={'이메일 인증'}
                     rules={[
-                        {required: true, message: '필수 입력 값입니다.'},
-                        {type: 'email', message: '예) aaa@university.com'}
+                        { required: true, message: '필수 입력 값입니다.' },
+                        { type: 'email', message: '예) aaa@university.com' }
                     ]}
                     colon={false}>
-                    <Search placeholder="학교 이메일 입력" enterButton="보내기" size="large" onSearch={() => {
-                        // if valid email form, dispatch send verify code
-                    }}/>
+                    <Input placeholder="학번" onChange={onChangeEmail}/>
+                </Form.Item>
+                
+                <Form.Item
+                    name={'password'}
+                    label={'비밀번호'}
+                    rules={[
+                        { required: true, message: '필수 입력값입니다.' },
+                        { type : 'password', message: '8 ~ 12글자' }
+                    ]}
+                    colon={false}>
+                    <Input.Password placeholder='password' onChange={onChangePassword}/>
+                </Form.Item>
+
+                <Form.Item
+                    name={'name'}
+                    label={'이름'}
+                    rules={[
+                        { required: true, message: '필수 입력값입니다.' },
+                    ]}
+                    colon={false}>
+                    <Input type = 'text' placeholder='이름' onChange={onChangeName}/>
                 </Form.Item>
 
                 <Form.Item
                     name={'verify_code'}
                     label={'인증 번호'}
                     rules={[
-                        {required: true, message: '필수 입력값입니다.'},
+                        { required: true, message: '필수 입력값입니다.' },
                         {
                             validator: (_, value) =>
                                 value ? Promise.resolve() : Promise.reject('유효한 값을 입력해주세요.') // Promise.resolve() 대신 fetch result
@@ -77,12 +128,13 @@ const Register = (props) => {
                     colon={false}>
                     <Search placeholder="인증번호 입력" enterButton="인증 확인" size="large" onSearch={() => {
                         // dispatch submit verify code
-                    }}/>
+                    }} />
                 </Form.Item>
 
                 <SubmitButton htmlType={'submit'} onClick={onSubmit} type={'primary'} block>
                     가입하기
                 </SubmitButton>
+                    
             </Form>
         </Wrapper>
     );

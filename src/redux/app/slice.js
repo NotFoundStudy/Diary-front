@@ -1,51 +1,71 @@
 import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const name = 'APP';
+const baseURL = '';
 
 const initialState = {
-    inputs: {
-        email: '',
-        password: '',
-    },
     user: { // Login data
         email: '',
-        nickname: '',
+        studentId : '',
+        password: '',
+        name: '',
+        role: '',
         accessToken: '',
-        loading: false,
-        error: null,
+    },
+    load : {
+        isLoading: false,
+        errorMessage : '',
     },
     toastMessage: '',
 };
 
-const reducer = {
-    // changeInput: (state, { payload: input }) => {
-    //     const { name, value } = input;
-    //     state.inputs = {
-    //         ...state.inputs,
-    //         [name]: value,
-    //     };
-    // },
-	loginRequest: (state, { payload }) => {
-        console.log('@@ slice~', payload);
+const reducers = {
+    changeUserInfo: (state, { payload }) => {
+        const { name, value } = payload;
         state.user = {
             ...state.user,
-            loading: true,
+            [name]: value,
         };
+    },
+    registRequest : (state) => {
+        const {user} = state;
+        // regist request
+        
+
+    },
+	loginRequest: (state, {payload}) => {
+        console.log('@@ slice~', payload);
+        state.user = {
+            ...state.user
+        };
+        state.load = {
+            isLoading : true,
+            errorMessage : '',
+        }
+
+        //loginRequest
 	},
     loginSuccess: (state, { payload: user }) => {
         state.user = {
             ...state.user,
             ...user,
-            loading: false,
-            error: null,
         };
+        
+        state.load = {
+            isLoading : false,
+            errorMessag : '',
+        }
     },
     loginFail: (state, { payload: error }) => {
         state.user = {
             ...state.user,
-            loading: false,
-            error,
         };
+        
+        state.load = {
+            isLoading : false,
+            errorMessag : 'login Fail',
+        }
     },
     updateState: (state, { payload }) => {
         state = {
@@ -53,6 +73,7 @@ const reducer = {
             ...payload,
         };
     },
+
     logout: (state) => {},
     setToastMessage: () => {},
 };
@@ -60,7 +81,7 @@ const reducer = {
 const slice = createSlice({
     name,
     initialState,
-    reducer,
+    reducers,
 });
 
 export const Name = slice.name;
