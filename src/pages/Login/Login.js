@@ -1,12 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Form, Input, Button,} from 'antd';
-import {useSelector, useDispatch} from 'react-redux';
-import {selector as appSelector} from '../../redux/app/selector';
+import {useDispatch} from 'react-redux';
 import {Action} from '../../redux/app/slice';
-
-import BasicInfoConstants from '../../constants/basicInfo'
-
 import PageTitle from "../../components/Titles/PageTitle";
 
 const Login = (props) => {
@@ -34,7 +30,7 @@ const Login = (props) => {
 
     return (
         <Wrapper>
-            <PageTitle title={'로그인'}/>
+            <PageTitle title={'Login'}/>
 
             학번 또는 교직원 번호로 로그인해주세요.
             (추가 스타일링 예정)
@@ -58,7 +54,7 @@ const Login = (props) => {
                     label={'비밀번호'}
                     rules={[
                         {required: true, message: '비밀번호는 필수 입력값 입니다.'},
-                        {pattern: /^[A-Za-z0-9]{6,12}$/, message: '비밀번호는 숫자와 문자 포함 형태의 6~12자리입니다.'},
+                        // {pattern: /^[A-Za-z0-9]{6,12}$/, message: '비밀번호는 숫자와 문자 포함 형태의 6~12자리입니다.'},
                         ]}
                     colon={false}>
                     <Input.Password id='password' placeholder={'비밀번호'} onChange={onChangeInfo}/>

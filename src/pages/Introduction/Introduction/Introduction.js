@@ -8,18 +8,18 @@ import {Button} from "antd";
 
 const Introduction = (props) => {
 
-    useEffect(()=>{
+    useEffect(() => {
         // 1. fetch editor written HTML, named value/initialValue?
         // 2. RoutePath - by /index.js ? (X) => by each page
-    },[])
+    }, [])
 
     return (
         <Wrapper>
-           <PageTitle title={'Introduction'}/>
-           <RightWrap>
-               {/* 로그인 role에 따라 */}
-               <Button>등록/수정</Button>
-           </RightWrap>
+            <PageTitle title={'Introduction'}/>
+            <RightWrap>
+                {/* 로그인 role에 따라 */}
+                <Button>등록/수정</Button>
+            </RightWrap>
             <Viewer initialValue={mock.viewerHtml}/>
         </Wrapper>
     )

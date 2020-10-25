@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Collapse, Table, Tabs} from "antd";
 import PublicationItems from "./components/PublicationItems";
 import {mock} from "../../mock/mock";
-import {useSelector} from "react-redux";
+import PageTitle from "../../components/Titles/PageTitle";
 
 const {TabPane} = Tabs;
 const {Panel} = Collapse;
@@ -46,6 +46,7 @@ const Publication = (props) => {
 
     return (
         <Wrapper>
+            <PageTitle title={'Publication'}/>
             <PublicationItems item={list[0]}/>
         </Wrapper>
     )

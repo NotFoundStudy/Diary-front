@@ -12,9 +12,9 @@ const Footer = (props) => {
             <Container>
                 <Top>
                     <Links>
-                        <LinkItem href={'http://his.pusan.ac.kr/cmmCon/Privacy/view..do'}>개인정보처리방침</LinkItem>
-                        <LinkItem href={'http://his.pusan.ac.kr/cmmCon/copyright/view..do'}>저작권보호정책</LinkItem>
-                        <LinkItem href={'http://his.pusan.ac.kr/cmmCon/email/view..do'}>이메일무단수집거부</LinkItem>
+                        <LinkItem href={''}>개인정보처리방침</LinkItem>
+                        <LinkItem href={''}>저작권보호정책</LinkItem>
+                        <LinkItem href={''}>이메일무단수집거부</LinkItem>
                     </Links>
                     <SelectWrap>
                         <Select
@@ -24,8 +24,8 @@ const Footer = (props) => {
                                     value: '',
                                 },
                                 {
-                                    name: '부산대학교',
-                                    value: 'http://www.pusan.ac.kr/index.jsp',
+                                    name: '수원대학교',
+                                    value: 'https://www.suwon.ac.kr/index.html?menuno=593',
                                 },
                             ]}
                             defaultValue={'관련사이트 바로가기'}
@@ -63,6 +63,12 @@ const Top = styled.div`
   padding: 0 14px;
   border-top:1px solid #ddd;
   border-bottom:1px solid #ddd;
+  // rwd
+  flex-wrap: wrap;
+  @media only screen and (max-width: 600px) {
+    padding-bottom: 14px;
+    justify-content: center;    
+  }
 `;
 const Links = styled.div`
   padding: 14px 0;  
@@ -76,7 +82,7 @@ const LinkItem = styled.a`
     padding-left: 0;
     border-left: none;
   }
-  font-size: 14px;
+  font-size: 0.8rem;
   color:#444444;
 `;
 const SelectWrap = styled.div`
@@ -92,20 +98,31 @@ const DemoUi = styled.div`
   color:#e4e4e4;
   cursor:pointer;
 `;
+
+const Text = styled.div`
+  p{
+    margin: 0;
+    line-height: 1.7;
+    font-size: 0.75rem;
+    color:#868686;
+    &.light{
+      color:#b7b7b7;
+    }
+  }
+`;
+
 const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 13px 10px;
-`;
-const Text = styled.div`
-  p{
-    margin: 0;
-    line-height: 1.7;
-    font-size: 13px;
-    color:#868686;
-    &.light{
-      color:#b7b7b7;
+  // rwd
+  flex-wrap: wrap;
+  @media only screen and (max-width: 600px) {
+    justify-content: center;    
+    ${Text} {
+      margin-bottom: 10px;
+      text-align: center;
     }
   }
 `;

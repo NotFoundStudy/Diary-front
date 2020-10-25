@@ -59,7 +59,7 @@ const Register = (props) => {
 
     return (
         <Wrapper>
-            <PageTitle title={'회원가입'} />
+            <PageTitle title={'Register'} />
 
             <Form
                 form={form}

@@ -27,6 +27,7 @@ const Post = (props) => {
 
 const Wrapper = styled.div`
   display: flex;
+  padding: 0.8em;
   border-bottom:1px solid #ddd;
   cursor:pointer;
 `;

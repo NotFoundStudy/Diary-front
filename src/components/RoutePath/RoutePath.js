@@ -12,15 +12,17 @@ const RoutePath = (props) => {
                 name: 'Introduction',
             },
             {
-                to: '/people',
+                to: '/introduction/people',
                 name: 'People',
             },
             {
-                to: '/currentMember',
-                name: 'Current Member',
+                to: '/introduction/people/currentMember',
+                name: 'Current Members',
             },
         ]
     } = props;
+
+    // store에서 꺼내오기 selector
 
     return (
         <Wrapper>
