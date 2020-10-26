@@ -1,61 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useHistory } from "react-router-dom";
 import BasicInfoConstants from '../../constants/basicInfo'
-
 import { Form, Input, Button, Steps, Mentions, Checkbox, } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
-import { selector as appSelector } from '../../redux/app/selector';
-import { Action } from '../../redux/app/slice';
 import PageTitle from "../../components/Titles/PageTitle";
+import {userCreators} from "../../redux/actionCreators";
 
 const { Search } = Input;
 
 const Register = (props) => {
 
     const [ form ] = Form.useForm();
-    const dispatch = useDispatch();
-    const {changeUserInfo, registRequest} = Action;
-
-    // const {user} = selector;
-
-    const userInfoDispatcher = (name, value) => {
-        dispatch(changeUserInfo({name, value}));
-    }
 
     //async 주의
     const onSubmit = async () => {
         try {
             const values = await form.validateFields();
-            // const {}
             console.log('Success:', values);
-            // dispatch(AppAction.registerRequest(values));
+            userCreators.register(values);
         } catch (errorInfo) {
             console.log('Failed:', errorInfo);
-            // dispatch(AppAction.registerFail(errorInfo));
         }
     };
-
-    const onChangeEmail = (e) => {
-        const {value} = e.target;
-        const {email} = BasicInfoConstants;
-
-        userInfoDispatcher(email.id, value);
-    }
-
-    const onChangePassword = (e) => {
-        const {value} = e.target;
-        const {password} = BasicInfoConstants
-
-        userInfoDispatcher(password.id, value);
-    }
-
-    const onChangeName = (e) => {
-        const {value} = e.target;
-        const {name} = BasicInfoConstants;
-
-        userInfoDispatcher(name.id, value);
-    }
 
     return (
         <Wrapper>
@@ -91,7 +56,7 @@ const Register = (props) => {
                         { type: 'email', message: '예) aaa@university.com' }
                     ]}
                     colon={false}>
-                    <Input placeholder="학번" onChange={onChangeEmail}/>
+                    <Input placeholder="학번"/>
                 </Form.Item>
                 
                 <Form.Item
@@ -102,7 +67,7 @@ const Register = (props) => {
                         { type : 'password', message: '8 ~ 12글자' }
                     ]}
                     colon={false}>
-                    <Input.Password placeholder='password' onChange={onChangePassword}/>
+                    <Input.Password placeholder='password'/>
                 </Form.Item>
 
                 <Form.Item
@@ -112,7 +77,7 @@ const Register = (props) => {
                         { required: true, message: '필수 입력값입니다.' },
                     ]}
                     colon={false}>
-                    <Input type = 'text' placeholder='이름' onChange={onChangeName}/>
+                    <Input type = 'text' placeholder='이름'/>
                 </Form.Item>
 
                 <Form.Item
@@ -134,7 +99,6 @@ const Register = (props) => {
                 <SubmitButton htmlType={'submit'} onClick={onSubmit} type={'primary'} block>
                     가입하기
                 </SubmitButton>
-                    
             </Form>
         </Wrapper>
     );

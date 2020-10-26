@@ -1,10 +1,10 @@
 import {combineReducers} from "redux";
-import {Reducer as appReducer} from "./app/slice";
-import {Reducer as menuReducer} from "./menu/slice";
+import {reducer as appReducer} from "./app/redux";
+import {reducer as userReducer} from "./user/redux";
 
 const rootReducer = combineReducers({
     app : appReducer,
-    menu: menuReducer,
+    user : userReducer,
 })
 
 export default rootReducer;

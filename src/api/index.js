@@ -61,7 +61,10 @@ const request = async (method, url, data) => {
 };
 
 const Api = {
-    logInSample: (userInfo) => request(fetchEnum.POST, `/login-sample`, userInfo),
+    register: (values) => request(fetchEnum.POST, `/register-sample`, values),
+    login: (userInfo) => request(fetchEnum.POST, `/login-sample`, userInfo),
+    logout: (accessToken) => request(fetchEnum.POST, `/logout-sample`, accessToken),
+
     fetchSample: (userId) => request(fetchEnum.GET, `/fetch-sample/${userId}`),
 }
 

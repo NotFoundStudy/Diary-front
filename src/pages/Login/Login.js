@@ -1,32 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Form, Input, Button,} from 'antd';
-import {useDispatch} from 'react-redux';
-import {Action} from '../../redux/app/slice';
 import PageTitle from "../../components/Titles/PageTitle";
+import {userCreators} from "../../redux/actionCreators";
 
 const Login = (props) => {
-    const dispatch = useDispatch();
-    const {loginRequest, changeUserInfo} = Action;
+
     const [form] = Form.useForm();
 
     const onSubmit = async () => {
         try {
-            const validInfos = await form.validateFields();
-            dispatch(loginRequest(validInfos))
-            console.log('Success:', validInfos);
-            // dispatch(AppAction.loginRequest(values));
+            const values = await form.validateFields();
+            console.log('Success:', values);
+            userCreators.login(values)
         } catch (errorInfo) {
             console.log('Failed:', errorInfo);
-            // dispatch(AppAction.loginFail(errorInfo));
         }
     };
-
-    const onChangeInfo = (e) => {
-        const {value, id} = e.target;
-        
-        dispatch(changeUserInfo(id, value));
-    }
 
     return (
         <Wrapper>
@@ -47,7 +37,7 @@ const Login = (props) => {
                         {type: 'email', message: '예) aaa@university.com'}
                     ]}
                     colon={false}>
-                    <Input id='email' placeholder={'이메일'} onChange={onChangeInfo}/>
+                    <Input id='email' placeholder={'이메일'}/>
                 </Form.Item>
                 <Form.Item
                     name="password"
@@ -57,7 +47,7 @@ const Login = (props) => {
                         // {pattern: /^[A-Za-z0-9]{6,12}$/, message: '비밀번호는 숫자와 문자 포함 형태의 6~12자리입니다.'},
                         ]}
                     colon={false}>
-                    <Input.Password id='password' placeholder={'비밀번호'} onChange={onChangeInfo}/>
+                    <Input.Password id='password' placeholder={'비밀번호'}/>
                 </Form.Item>
 
                 <Form.Item>
