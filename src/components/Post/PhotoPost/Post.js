@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {navigate} from "../../../helper/historyHelper";
+import {appCreators} from "../../../redux/actionCreators";
 
 const Post = (props) => {
     const {
@@ -8,7 +9,9 @@ const Post = (props) => {
     } = props;
 
     return (
-        <Wrapper onClick={() => navigate(`/introduction/people/currentMember/${item.id}`)}>
+        <Wrapper onClick={() => {
+            navigate(`/member/current/${item.id}`)
+        }}>
             <Thumb src={item.thumbnail}/>
             <Desc>
                 <p className={'title'}>{item.name}</p>

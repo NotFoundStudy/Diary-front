@@ -1,9 +1,8 @@
 export const mock = {
-    members: {
-        current: {
-            total: 5,
-            page_size: 15,
-            current: 2,
+    member: {
+        currentMember: {
+            total: 10,
+            page_size: 5,
             list : [
                 {
                     id: 0,

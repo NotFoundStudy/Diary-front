@@ -9,8 +9,8 @@ import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import Introduction from "./pages/Introduction/Introduction/Introduction";
 import Professor from "./pages/Introduction/Professor/Professor";
-import CurrentMember from "./pages/Members/CurrentMember/CurrentMember";
-import Alumni from "./pages/Members/Alumni/Alumni";
+import CurrentMember from "./pages/Member/CurrentMember/CurrentMember";
+import Alumni from "./pages/Member/Alumni/Alumni";
 import Research from "./pages/Research/Research";
 import Publication from "./pages/Publication/Publication";
 import Lecture from "./pages/Lecture/Lecture";
@@ -21,10 +21,14 @@ import Layout from "./components/Layout/Layout";
 import IntroductionWrite from "./pages/Introduction/Introduction/IntroductionWrite";
 import Viewer from "./components/Editor/Viewer";
 import ProfessorWrite from "./pages/Introduction/Professor/ProfessorWrite";
-import Members from "./pages/Members";
+import Member from "./pages/Member";
 import {appCreators} from "./redux/actionCreators";
 import Auth from "./hoc/Auth";
-import RegisterConfirm from "./pages/RegisterConfirm/RegisterConfirm";
+import RegisterConfirm from "./pages/Register/RegisterConfirm";
+import FindId from "./pages/Login/FindId";
+import FindPw from "./pages/Login/FindPw";
+import List from "./components/Post/PhotoPost/List";
+import CurrentMemberDetail from "./pages/Member/CurrentMember/CurrentMemberDetail";
 
 const App = (props) => {
 
@@ -42,11 +46,12 @@ const App = (props) => {
                 <Switch>
                     <Route exact path={'/register'} component={Register}/>
                     <Route exact path={'/register-confirm'} component={RegisterConfirm}/>
+                    <Route exact path={'/find/pw'} component={FindPw}/>
                     <Route exact path={'/login'} component={Login}/>
 
                     {/* 리다이렉트 처리 : 오타, url에 params 추가 */}
 
-                    <Route exact path={'/'} component={Viewer}/>
+                    <Route exact path={'/'} component={Home}/>
 
                     {/* introduction & research */}
                     {/* 컨텐츠 구성 질의, exact path 수정 */}
@@ -59,12 +64,13 @@ const App = (props) => {
                     <Route exact path={'/professor/write'} component={Auth(ProfessorWrite, true)}/>
                     <Route path={'/professor'} component={Auth(Professor)}/>
 
-                    {/* members */}
-                    <Route path={'/members/current'} component={Auth(CurrentMember, null)}/>
-                    <Route path={'/members/current/:id'} component={Auth(CurrentMember, null)}/>
-                    <Route path={'/members/alumni'} component={Auth(Alumni, null)}/>
-                    <Route path={'/members/alumni/:id'} component={Auth(Alumni, null)}/>
-                    <Route path={'/members'} component={Auth(Members, null)}/>
+                    {/* member */}
+                    <Route path={'/member/current'} component={Auth(CurrentMember, null)}/>
+                    <Route path={'/member/current/:id'} component={Auth(CurrentMemberDetail, null)}/>
+                    <Route path={'/member/alumni'} component={Auth(Alumni, null)}/>
+                    <Route path={'/member/alumni/:id'} component={Auth(Alumni, null)}/>
+                    {/* redirect /member to member/current*/}
+                    <Route path={'/member'} component={Auth(Member, null)}/>
 
                     {/* publications */}
                     <Route path={'/publication'} component={Auth(Publication, null)}/>
@@ -81,8 +87,8 @@ const App = (props) => {
                     {/* contact */}
                     <Route exact path={'/contact'} component={Auth(Contact, null)}/>
 
-                    <Route path={'/error/404'} component={Auth(Page404, null)}/>
-                    <Redirect to={'/error/404'}/>
+                    {/*<Route path={'/error/404'} component={Auth(Page404, null)}/>*/}
+                    {/*<Redirect to={'/error/404'}/>*/}
                 </Switch>
             </Layout>
         </Wrapper>
