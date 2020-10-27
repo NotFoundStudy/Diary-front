@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {navigate} from "../helper/historyHelper";
+import {getAccessToken} from "../helper/tokenHelper";
 
 const fetchEnum = {
     // method
@@ -25,7 +26,7 @@ const axiosInstance = axios.create({
     headers: {
         'Accept': fetchEnum.APPLICATION_JSON,
         'Content-Type': fetchEnum.APPLICATION_JSON,
-        // 'Authorization': process.env.REACT_APP_ACCESS_KEY,
+        'Authorization': `Bearer ${getAccessToken()}`, // 토큰 항상 보내는 건 피할 사항?
     }
 });
 
@@ -61,11 +62,20 @@ const request = async (method, url, data) => {
 };
 
 const Api = {
-    register: (values) => request(fetchEnum.POST, `/register-sample`, values),
-    login: (userInfo) => request(fetchEnum.POST, `/login-sample`, userInfo),
-    logout: (accessToken) => request(fetchEnum.POST, `/logout-sample`, accessToken),
+    login: (userId, password) => request(fetchEnum.POST, `/login`, {userId, password}),
+    register: (email, password, studentId, name) => request(fetchEnum.POST, `/register`, {email, password, studentId, name}),
+    updateUser: (name, password) => request(fetchEnum.PUT, `/user`, {name, password}),
+    deleteUser: () => request(fetchEnum.DELETE, `/user`), // token
 
-    fetchSample: (userId) => request(fetchEnum.GET, `/fetch-sample/${userId}`),
+    requestConfirmationCode: () => request(fetchEnum.GET, `/confirmation-code`), // token
+    Confirmed: (confirmationCode) => request(fetchEnum.PUT, `/confirmation-code`, confirmationCode), // token
+    checkEmail: (email) => request(fetchEnum.POST, `/checkEmail`, email), // no token
+    checkStudentId: (studentId) => request(fetchEnum.POST, `/checkStudentId`, studentId), // token
+    changeRoles: (role) => request(fetchEnum.POST, `/changeRoles`, role), // token
+    // 미완성
+    resetPassword: () => request(fetchEnum.POST, `/find/reset-password`), // token
+
+    logout: (accessToken) => request(fetchEnum.POST, `/logout-sample`, accessToken),
 }
 
 export default Api;
