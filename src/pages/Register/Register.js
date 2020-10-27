@@ -1,15 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import BasicInfoConstants from '../../constants/basicInfo'
-import { Form, Input, Button, Steps, Mentions, Checkbox, } from 'antd';
+import {Form, Input, Button, Steps, Mentions, Checkbox,} from 'antd';
 import PageTitle from "../../components/Titles/PageTitle";
 import {userCreators} from "../../redux/actionCreators";
 
-const { Search } = Input;
+const {Search} = Input;
 
 const Register = (props) => {
 
-    const [ form ] = Form.useForm();
+    const [form] = Form.useForm();
+
+    const [passwordConfirm, setPasswordConfirm] = useState('');
 
     //async 주의
     const onSubmit = async () => {
@@ -24,17 +26,17 @@ const Register = (props) => {
 
     return (
         <Wrapper>
-            <PageTitle title={'Register'} />
+            <PageTitle title={'가입하기'}/>
 
             <Form
                 form={form}
-                name={'step1'}
-                initialValues={{ 'clause1': false, }}
-                layout="vertical">
+                name={'register'}
+                initialValues={{'clause1': true,}}
+                validateMessages={{required: "필수 입력 값 입니다."}}>
 
                 {/* no need <Form.Item> wrapper*/}
                 <Mentions rows="15"
-                    value="약관을 입력해주세요." />
+                          value="약관을 입력해주세요."/>
                 <Form.Item
                     name={'clause1'}
                     valuePropName="checked"
@@ -44,56 +46,67 @@ const Register = (props) => {
                                 value ? Promise.resolve() : Promise.reject('필수 동의 항목입니다.')
                         }
                     ]}
-                    style={{ marginBottom: '30px' }}>
+                    style={{marginBottom: '30px'}}>
                     <Checkbox>위 약관에 동의합니다.</Checkbox>
                 </Form.Item>
 
                 <Form.Item
                     name={'email'}
-                    label={'이메일 인증'}
+                    label={'학교 이메일'}
                     rules={[
-                        { required: true, message: '필수 입력 값입니다.' },
-                        { type: 'email', message: '예) aaa@university.com' }
+                        {required: true},
+                        {type: 'email', message: '학교 이메일을 입력해주세요.'},
                     ]}
                     colon={false}>
-                    <Input placeholder="학번"/>
+                    <Input type='text' placeholder='학교 이메일'/>
                 </Form.Item>
-                
+
                 <Form.Item
-                    name={'password'}
-                    label={'비밀번호'}
+                    name={'studentId'}
+                    label={'학번'}
                     rules={[
-                        { required: true, message: '필수 입력값입니다.' },
-                        { type : 'password', message: '8 ~ 12글자' }
+                        {required: true},
+                        // 몇글자 숫자 Regex
                     ]}
                     colon={false}>
-                    <Input.Password placeholder='password'/>
+                    <Input type='text' placeholder='학번 (숫자 8자)'/>
+                </Form.Item>
+
+                <Form.Item
+                    name="password"
+                    label={'비밀번호'}
+                    value={passwordConfirm}
+                    onChange={(e) => setPasswordConfirm(e.target.value)}
+                    rules={[
+                        {required: true},
+                        // {pattern: /^[A-Za-z0-9]{6,12}$/, message: '숫자와 문자 포함 형태의 6~12자리로 구성하여 주세요.'},
+                    ]}
+                    colon={false}>
+                    <Input.Password id='password' placeholder={'비밀번호 (숫자와 문자 포함 형태의 6~12자리)'}/>
+                </Form.Item>
+
+                <Form.Item
+                    name="passwordConfirm"
+                    label={'비밀번호 확인'}
+                    rules={[
+                        {required: true},
+                        {
+                            validator: (_, value) =>
+                                value === passwordConfirm ? Promise.resolve() : Promise.reject('비밀번호가 일치하지 않습니다.')
+                        },
+                    ]}
+                    colon={false}>
+                    <Input.Password id='passwordConfirm' placeholder={'비밀번호 확인'}/>
                 </Form.Item>
 
                 <Form.Item
                     name={'name'}
                     label={'이름'}
                     rules={[
-                        { required: true, message: '필수 입력값입니다.' },
+                        {required: true},
                     ]}
                     colon={false}>
-                    <Input type = 'text' placeholder='이름'/>
-                </Form.Item>
-
-                <Form.Item
-                    name={'verify_code'}
-                    label={'인증 번호'}
-                    rules={[
-                        { required: true, message: '필수 입력값입니다.' },
-                        {
-                            validator: (_, value) =>
-                                value ? Promise.resolve() : Promise.reject('유효한 값을 입력해주세요.') // Promise.resolve() 대신 fetch result
-                        }
-                    ]}
-                    colon={false}>
-                    <Search placeholder="인증번호 입력" enterButton="인증 확인" size="large" onSearch={() => {
-                        // dispatch submit verify code
-                    }} />
+                    <Input type='text' placeholder='이름'/>
                 </Form.Item>
 
                 <SubmitButton htmlType={'submit'} onClick={onSubmit} type={'primary'} block>
@@ -105,17 +118,32 @@ const Register = (props) => {
 };
 
 const Wrapper = styled.div`
-    .ant-form-item{
+    .ant-form-item {
       margin-bottom: 17px;
     }
-    .ant-input-affix-wrapper{
-        padding: 0 11px;
-    }
-    .ant-input{
+    .ant-input {
         height: 38px;
     }
-    .ant-input-affix-wrapper, .ant-input{
+    .ant-form-item-label > label {
+      height: initial;
+      line-height: 38px;
+      font-size: 15px;
+    }
+    .ant-input-affix-wrapper, .ant-input {
       border-radius: 0;
+    }
+    .ant-input-affix-wrapper { // password input
+        padding: 0 11px;
+    }
+    .ant-form-horizontal .ant-form-item-label { // form.item label & input layout
+      width: 110px;
+      text-align:left;
+    }
+    .ant-mentions { // clause textarea
+      margin-bottom: 10px;
+       > textarea {
+         padding: 13px 13px;
+       }
     }
     
     // search
@@ -144,15 +172,15 @@ const Wrapper = styled.div`
 `;
 
 const SubmitButton = styled(Button)`
-  height: 45px;
-  margin-top: 15px;
-  background:#444;
-  border-color:#444;
+  height: 48px;
+  margin-top: 30px;
+  background:#094c90;
+  border-color:#094c90;
   line-height: initial;
   font-size: 17px;
   &:hover, &:focus{
-    background:#585858;
-    border-color:#585858;
+    background:#0a5199;
+    border-color:#0a5199;
   }
 `;
 export default Register;

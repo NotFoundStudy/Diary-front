@@ -64,13 +64,15 @@ const request = async (method, url, data) => {
 const Api = {
     login: (userId, password) => request(fetchEnum.POST, `/login`, {userId, password}),
     register: (email, password, studentId, name) => request(fetchEnum.POST, `/register`, {email, password, studentId, name}),
+    requestConfirmationCode: () => request(fetchEnum.GET, `/confirmation-code`), // token
+    // 입력됐을 때 바로 바로 유효 check하는 건가 (중복 아이디 검사처럼)
+    confirmed: (confirmationCode) => request(fetchEnum.PUT, `/confirmation-code`, confirmationCode), // token
+    checkEmail: (email) => request(fetchEnum.POST, `/checkEmail`, email), // no token
+    checkStudentId: (studentId) => request(fetchEnum.POST, `/checkStudentId`, studentId), // token
+
     updateUser: (name, password) => request(fetchEnum.PUT, `/user`, {name, password}),
     deleteUser: () => request(fetchEnum.DELETE, `/user`), // token
 
-    requestConfirmationCode: () => request(fetchEnum.GET, `/confirmation-code`), // token
-    Confirmed: (confirmationCode) => request(fetchEnum.PUT, `/confirmation-code`, confirmationCode), // token
-    checkEmail: (email) => request(fetchEnum.POST, `/checkEmail`, email), // no token
-    checkStudentId: (studentId) => request(fetchEnum.POST, `/checkStudentId`, studentId), // token
     changeRoles: (role) => request(fetchEnum.POST, `/changeRoles`, role), // token
     // 미완성
     resetPassword: () => request(fetchEnum.POST, `/find/reset-password`), // token

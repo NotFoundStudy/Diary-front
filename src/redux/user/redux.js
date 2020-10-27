@@ -9,6 +9,7 @@ export const Action = {
         CLEAR_STORE: '@USER/CLEAR_STORE',
 
         REGISTER : '@USER/REGISTER',
+        REGISTER_CONFIRM : '@USER/REGISTER_CONFIRM',
         LOGIN: 'LOGIN',
         LOGOUT: 'LOGOUT',
     },
@@ -24,6 +25,10 @@ export const Action = {
         register: (values) => ({
             type: Action.Types.REGISTER,
             values
+        }),
+        registerConfirm: (confirmCode) => ({
+            type: Action.Types.REGISTER_CONFIRM,
+            confirmCode
         }),
         login: (userInfo) => ({
             type: Action.Types.LOGIN,

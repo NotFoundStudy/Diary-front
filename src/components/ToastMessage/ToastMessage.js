@@ -18,13 +18,14 @@ const Wrapper = styled.div`
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 20px;
+  bottom: 70px;
   z-index: 100;
-  padding: 10px 25px;
+  padding: 13px 29px;
+  box-shadow: 0 0 10px rgba(0,0,0,.25);
   border-radius: 25px;
-  background: #0f9ee7;
+  background: #1f6cb9;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400;
   color:#fff;
 `;
 

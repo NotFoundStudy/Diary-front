@@ -24,6 +24,7 @@ import ProfessorWrite from "./pages/Introduction/Professor/ProfessorWrite";
 import Members from "./pages/Members";
 import {appCreators} from "./redux/actionCreators";
 import Auth from "./hoc/Auth";
+import RegisterConfirm from "./pages/RegisterConfirm/RegisterConfirm";
 
 const App = (props) => {
 
@@ -39,8 +40,9 @@ const App = (props) => {
             }
             <Layout>
                 <Switch>
-                    <Route path={'/register'} component={Register}/>
-                    <Route path={'/login'} component={Login}/>
+                    <Route exact path={'/register'} component={Register}/>
+                    <Route exact path={'/register-confirm'} component={RegisterConfirm}/>
+                    <Route exact path={'/login'} component={Login}/>
 
                     {/* 리다이렉트 처리 : 오타, url에 params 추가 */}
 
