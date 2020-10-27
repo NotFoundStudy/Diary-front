@@ -1,83 +1,73 @@
-import axios from 'axios';
-import {navigate} from "../helper/historyHelper";
-import {getAccessToken} from "../helper/tokenHelper";
+import axios from 'axios'
 
-const fetchEnum = {
-    // method
-    GET: 'get',
-    POST: 'post',
-    PUT: 'put',
-    DELETE: 'delete',
-
-    // content-type
-    APPLICATION_JSON: 'application/json',
-    APPLICATION_X_WWW_FORM_URL_ENCODED: 'application/x-www-form-urlencoded',
-    MULTIPART_FORM_DATA: 'multipart/form-data',
-    TEXT_PLAIN: 'text/plain',
-
-    // api baseUrl
-    API_BASE_URL: process.env.REACT_APP_API_BASE_URL
+export const Auth = {
+    create: (token = null) => {
+        const headers = {};
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+        axios.create({
+            baseURL: process.env.REACT_APP_API_BASE_URL,
+            headers: { 'X-Custom-Header': 'foobar' },
+            timeout: 1000,
+        });
+    },
 };
 
-const axiosInstance = axios.create({
-    baseURL: fetchEnum.API_BASE_URL,
-    timeout: 12000,
-    // withCredentials: true,
-    headers: {
-        'Accept': fetchEnum.APPLICATION_JSON,
-        'Content-Type': fetchEnum.APPLICATION_JSON,
-        'Authorization': `Bearer ${getAccessToken()}`, // 토큰 항상 보내는 건 피할 사항?
-    }
-});
+const nonAuthAPI = Auth.create()
 
-const request = async (method, url, data) => {
-    const config = {
-        method,
-        url,
-        data
-    };
-
-    if (data) {
-        if (method === fetchEnum.GET) {
-            config.params = data
-        } else {
-            config.data = data;
-        }
-    }
-
-    try {
-        const result = await axiosInstance(config);
-        // console.log('@@ [fetch result]', result);
-
-        return result;
-    } catch (e) {
-        if (e.response) {
-            if (e.response.status === 401) {
-                console.log('@@ [Error]', e.response.data);
-                // navigate('/Error/404');
-            }
-        }
-        console.log("Error server call: ", url, ", reason: ", e);
-    }
-};
-
-const Api = {
-    login: (userId, password) => request(fetchEnum.POST, `/login`, {userId, password}),
-    register: (email, password, studentId, name) => request(fetchEnum.POST, `/register`, {email, password, studentId, name}),
-    requestConfirmationCode: () => request(fetchEnum.GET, `/confirmation-code`), // token
-    // 입력됐을 때 바로 바로 유효 check하는 건가 (중복 아이디 검사처럼)
-    confirmed: (confirmationCode) => request(fetchEnum.PUT, `/confirmation-code`, confirmationCode), // token
-    checkEmail: (email) => request(fetchEnum.POST, `/checkEmail`, email), // no token
-    checkStudentId: (studentId) => request(fetchEnum.POST, `/checkStudentId`, studentId), // token
-
-    updateUser: (name, password) => request(fetchEnum.PUT, `/user`, {name, password}),
-    deleteUser: () => request(fetchEnum.DELETE, `/user`), // token
-
-    changeRoles: (role) => request(fetchEnum.POST, `/changeRoles`, role), // token
-    // 미완성
-    resetPassword: () => request(fetchEnum.POST, `/find/reset-password`), // token
-
-    logout: (accessToken) => request(fetchEnum.POST, `/logout-sample`, accessToken),
+// userId, password
+export const login = ({ token, body }) => {
+    const authAPI = Auth.create(token)
+    return authAPI.post('/login', body);
 }
 
-export default Api;
+// email, password, studentId, name
+export const register = ({ body }) => {
+    return nonAuthAPI.post('/register', body);
+}
+
+// name, password
+export const updateUser = ({ token, body }) => {
+    const authAPI = Auth.create(token)
+    return authAPI.put('/user', body);
+}
+
+// email 미완성
+export const deleteUser = ({ token, body }) => {
+    const authAPI = Auth.create(token)
+    return authAPI.delete('/user');
+}
+
+//
+export const requestConfirmationCode = ({ token }) => {
+    const authAPI = Auth.create(token)
+    return authAPI.get('/confirmation-code');
+}
+
+// confirmation-code
+export const Confirmed = ({ token, body }) => {
+    const authAPI = Auth.create(token)
+    return authAPI.put('/confirmation-code', body);
+}
+
+// email
+export const checkEmail = ({ body }) => {
+    return nonAuthAPI.post('/checkEmail', body);
+}
+
+// studentId
+export const checkStudentId = ({ body }) => {
+    return nonAuthAPI.post('/checkStudentId', body);
+}
+
+// role
+export const changeRoles = ({ token, body }) => {
+    const authAPI = Auth.create(token)
+    return authAPI.post('/changeRoles', body);
+}
+
+// 미완성
+export const resetPassword = ({ body }) => {
+    return nonAuthAPI.post('/find/reset-password', body);
+}
