@@ -28,7 +28,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.span`
-  padding-bottom: 0.7rem;
+  padding-bottom: 1rem;
   border-bottom: 3px solid #2d2d2d;
   text-transform: capitalize;
   font-size: 1.5rem; //37px;

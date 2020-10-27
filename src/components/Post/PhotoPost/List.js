@@ -1,22 +1,31 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from "styled-components";
 import Post from "./Post";
 import Pagination from "../../Pagination/Pagination";
+import {mock} from "../../../mock/mock";
+import {navigate} from "../../../helper/historyHelper";
 
 
 const List = (props) => {
     const {
-        list,
+        list = mock.member.currentMember,
     } = props;
+
+    useEffect(()=>{
+        // navigate('member/current?page=1&?pageSize=10');
+    },[])
 
     return (
         <Wrapper>
             {
-              list.map(item => <Post key={item.id} item={item}/>)
+              list?.list?.map(item => <Post key={item.id} item={item}/>)
             }
             <Pagination current={1}
-                        total={50}
-                        onShowSizeChange={true}
+                        total={list.total}
+                        onShowSizeChanger
+                        onShowSizeChange={(current, pageSize) => {
+                            console.log('@@ current, pageSize', current, pageSize);
+                        }}
                         style={{marginTop: '30px'}}/>
         </Wrapper>
     )

@@ -2,7 +2,7 @@ import {all, call, fork, put, take, takeLatest} from '@redux-saga/core/effects';
 import {getAccessToken, setAccessToken} from '../../helper/tokenHelper';
 import {navigate} from '../../helper/historyHelper';
 import {Action} from "./redux";
-import Api from "../../api";
+import Api from "../../api/index2";
 import {appCreators, userCreators} from "../actionCreators";
 
 

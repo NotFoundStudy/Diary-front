@@ -12,12 +12,8 @@ const RoutePath = (props) => {
                 name: 'Introduction',
             },
             {
-                to: '/introduction/people',
-                name: 'People',
-            },
-            {
-                to: '/introduction/people/currentMember',
-                name: 'Current Members',
+                to: '/member/current',
+                name: 'Current Member',
             },
         ]
     } = props;
