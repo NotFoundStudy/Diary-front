@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {Col} from "antd";
 import Menu from "../../Menu/Menu";
+import {useSelector} from "react-redux";
 
 const Sidebar = (props) => {
 
@@ -11,8 +12,8 @@ const Sidebar = (props) => {
 
     return (
         <>
-            <MenuHead>{list.head}</MenuHead>
-            <StyledMenu list={list.list}
+            <MenuHead>{list?.head}</MenuHead>
+            <StyledMenu list={list?.list}
                         mode={'inline'}
                         subMenuOpenDelay={0}/>
         </>
