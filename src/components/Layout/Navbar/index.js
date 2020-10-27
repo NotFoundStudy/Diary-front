@@ -6,41 +6,48 @@ import Shortcuts from "./Shortcuts";
 
 const menuList = [
     {
-        key: '/introduction',
+        key: 'INTRODUCTION & RESEARCH',
         icon: '',
-        name: 'INTRODUCTION',
+        name: 'INTRODUCTION & RESEARCH',
         sub_menu: [
             {
-                key: '/introduction/',
+                key: '/introduction',
                 icon: '',
                 name: 'Introduction',
             },
             {
-                key: '/introduction/professor',
+                key: '/research',
                 icon: '',
-                name: 'Professor',
-            },
-            {
-                key: '/introduction/people/currentMember',
-                icon: '',
-                name: 'Current Members',
-            },
-            {
-                key: '/introduction/people/alumni',
-                icon: '',
-                name: 'Alumni',
+                name: 'Research',
             },
         ]
     },
     {
-        key: '/research',
+        key: 'PROFESSOR',
         icon: '',
-        name: 'RESEARCH',
+        name: 'PROFESSOR',
         sub_menu: [
             {
-                key: '/research',
+                key: '/professor',
                 icon: '',
-                name: 'Research',
+                name: 'Professor',
+            },
+        ]
+    },
+    {
+        key: 'MEMBER',
+        icon: '',
+        name: 'MEMBER',
+        sub_menu: [
+            {
+                key: '/member/current',
+                icon: '',
+                name: 'Current Member',
+            },
+            {
+                key: '/member/alumni',
+                icon: '',
+                name: 'Alumni',
             },
         ]
     },
@@ -79,26 +86,19 @@ const menuList = [
         name: 'COMMUNITY',
         sub_menu: [
             {
+                key: '/community/notice',
+                icon: '',
+                name: 'Notice',
+            },
+            {
                 key: '/community/gallery',
                 icon: '',
                 name: 'Gallery',
             },
             {
-                key: '/community/notice',
+                key: '/community/board',
                 icon: '',
-                name: 'Notice',
-            },
-        ]
-    },
-    {
-        key: '/contact',
-        icon: '',
-        name: 'CONTACT',
-        sub_menu: [
-            {
-                key: '/contact',
-                icon: '',
-                name: 'Contact',
+                name: 'Board',
             },
         ]
     },
@@ -153,6 +153,14 @@ const Wrapper = styled.div`
        text-align: center;
        font-size: 19px;
        color:#fff;
+        
+     .ant-menu-item{ // dropdown 
+        height: 44px;
+        padding: 5px 0;
+        text-align: center;
+        line-height: 44px;
+        font-size: 17px;
+     }
     }
     .ant-menu-submenu-title{
       padding: 5px 0!important;

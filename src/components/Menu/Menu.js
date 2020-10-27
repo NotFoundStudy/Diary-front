@@ -6,56 +6,58 @@ import {navigate} from "../../helper/historyHelper";
 
 const {SubMenu} = AntdMenu;
 
+
+const sampleList = [
+    {
+        key: '/introduction',
+        icon: <AppstoreOutlined/>,
+        name: 'Introduction',
+        sub_menu: []
+    },
+    {
+        key: '/introduction/professor',
+        icon: <AppstoreOutlined/>,
+        name: 'Professor',
+        sub_menu: []
+    },
+    {   // key, icon, name, sub_menu 필수 항목
+        key: 'introduction/people', // url값 ( string만 입력 )
+        icon: <AppstoreOutlined/>, // 아이콘이 없다면 ''
+        name: 'People', // 1depth메뉴의 이름, 서브메뉴의 타이틀
+        sub_menu: [ // if(sub_menu)로 recursiveMenu(v) 순회 여부 결정
+            {
+                key: 'introduction/people/currentMember',
+                icon: '',
+                name: 'currentMember',
+                // sub_menu: [
+                //     {
+                //         key: '6',
+                //         icon: '',
+                //         name: 'option66',
+                //         sub_menu: []
+                //     },
+                //     {
+                //         key: '7',
+                //         icon: '',
+                //         name: 'option77',
+                //         sub_menu: []
+                //     },
+                // ]
+            },
+            {
+                key: 'introduction/people/alumni',
+                icon: '',
+                name: 'alumni',
+            },
+        ]
+    }
+]
 const Menu = (props) => {
     const {
         mode = 'horizontal', // vertical | horizontal | inline
         style,
         className,
-        list = [ // sample
-            {
-                key: '/introduction',
-                icon: <AppstoreOutlined/>,
-                name: 'Introduction',
-                sub_menu: []
-            },
-            {
-                key: '/introduction/professor',
-                icon: <AppstoreOutlined/>,
-                name: 'Professor',
-                sub_menu: []
-            },
-            {   // key, icon, name, sub_menu 필수 항목
-                key: 'introduction/people', // url값 ( string만 입력 )
-                icon: <AppstoreOutlined/>, // 아이콘이 없다면 ''
-                name: 'People', // 1depth메뉴의 이름, 서브메뉴의 타이틀
-                sub_menu: [ // if(sub_menu)로 recursiveMenu(v) 순회 여부 결정
-                    {
-                        key: 'introduction/people/currentMember',
-                        icon: '',
-                        name: 'currentMember',
-                        // sub_menu: [
-                        //     {
-                        //         key: '6',
-                        //         icon: '',
-                        //         name: 'option66',
-                        //         sub_menu: []
-                        //     },
-                        //     {
-                        //         key: '7',
-                        //         icon: '',
-                        //         name: 'option77',
-                        //         sub_menu: []
-                        //     },
-                        // ]
-                    },
-                    {
-                        key: 'introduction/people/alumni',
-                        icon: '',
-                        name: 'alumni',
-                    },
-                ]
-            }
-        ],
+        list,
     } = props;
 
     // localstorage등 에서 가져와서 하기 defaultSelcted등 세팅(여기서 하기)
