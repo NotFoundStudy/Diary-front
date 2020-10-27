@@ -4,9 +4,8 @@ import {Form, Input, Button,} from 'antd';
 import PageTitle from "../../components/Titles/PageTitle";
 import {userCreators} from "../../redux/actionCreators";
 import {AiOutlineMail} from "react-icons/all";
-import {navigate} from "../../helper/historyHelper";
 
-const Login = (props) => {
+const FindPw = (props) => {
 
     const [form] = Form.useForm();
 
@@ -22,48 +21,33 @@ const Login = (props) => {
 
     return (
         <Wrapper>
-            <PageTitle title={'로그인'}/>
-
-            {/*<div className="guide">*/}
-            {/*    <p>학번 또는 학교 이메일로 로그인해주세요.</p>*/}
-            {/*</div>*/}
+            <PageTitle title={'비밀번호 찾기'}/>
 
             <Form
                 form={form}
-                name="login"
+                name="findPw"
                 validateMessages={{required: "필수 입력 값 입니다."}}>
                 <Form.Item
                     name="userId"
                     label={'학번/이메일'}
                     rules={[
                         {required: true},
-                        // {type: 'email', message: '예) aaa@university.com'}
                     ]}
                     colon={false}>
                     <Input id='userId' placeholder={'학번 또는 학교 이메일'}/>
                 </Form.Item>
-                <Form.Item
-                    name="password"
-                    label={'비밀번호'}
-                    rules={[
-                        {required: true},
-                        // {pattern: /^[A-Za-z0-9]{6,12}$/, message: '비밀번호는 숫자와 문자 포함 형태의 6~12자리입니다.'},
-                        ]}
-                    colon={false}>
-                    <Input.Password id='password' placeholder={'비밀번호'}/>
-                </Form.Item>
 
                 <Form.Item>
                     <SubmitButton htmlType={'submit'} onClick={onSubmit} type={'primary'} block>
-                        로그인
+                        비밀번호 찾기
                     </SubmitButton>
                 </Form.Item>
             </Form>
 
-            <Helps>
-                <div onClick={() => navigate('/find/id')}>아이디 찾기</div>
-                <div onClick={() => navigate('/find/pw')}>비밀번호 찾기</div>
-            </Helps>
+            {/*<Helps>*/}
+            {/*    <div onClick={() => navigate('find/id')}>아이디 찾기</div>*/}
+            {/*    <div onClick={() => navigate('find/pw')}>비밀번호 찾기</div>*/}
+            {/*</Helps>*/}
         </Wrapper>
     );
 };
@@ -114,24 +98,4 @@ const SubmitButton = styled(Button)`
     border-color:#0a5199;
   }
 `;
-
-const Helps = styled.div`
-  font-size: 0;
-  > div {
-    display: inline-block;
-    vertical-align: middle;
-    & + & {
-      margin-left: 10px;
-      padding-left: 10px;
-      border-left:1px solid #ddd;
-      font-size: 14px;
-      font-weight: 400;
-      color:#ddd;
-      cursor:pointer;
-      &:hover{
-        text-decoration: underline;
-      }
-    }
-  }
-`;
-export default Login;
+export default FindPw;
