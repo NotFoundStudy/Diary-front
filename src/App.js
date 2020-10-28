@@ -25,7 +25,6 @@ import Member from "./pages/Member";
 import {appCreators} from "./redux/actionCreators";
 import Auth from "./hoc/Auth";
 import RegisterConfirm from "./pages/Register/RegisterConfirm";
-import FindId from "./pages/Login/FindId";
 import FindPw from "./pages/Login/FindPw";
 import List from "./components/Post/PhotoPost/List";
 import CurrentMemberDetail from "./pages/Member/CurrentMember/CurrentMemberDetail";
@@ -34,7 +33,7 @@ const App = (props) => {
 
     const {toastMessage} = useSelector(state => state.app);
     useEffect(() => {
-        appCreators.setToastMessage('토스트 메세지입니다.(4초)');
+        // token valid check request => false => navigate('/login')
     }, [])
 
     return (

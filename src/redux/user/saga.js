@@ -8,7 +8,7 @@ import {appCreators, userCreators} from "../actionCreators";
 
 export default function* () {
     yield all([
-        takeLatest(Action.Types.REGISTER, function* ({values}) {
+        takeLatest(Action.Types.REGISTER, function* ({body}) {
             try {
                 const result = yield call(Api.register, values);
                 yield put(appCreators.setToastMessage('등록 성공. 이메일 인증을 진행해주세요.')); // 추후 대응 변경
@@ -22,9 +22,9 @@ export default function* () {
                 // }))
             }
         }),
-        takeLatest(Action.Types.REGISTER_CONFIRM, function* ({confirmCode}) {
+        takeLatest(Action.Types.REQUEST_CONFIRMATION_CODE, function* ({body}) {
             try {
-                const result = yield call(Api.registerConfirm, confirmCode);
+                const result = yield call(Api.requestConfirmationCode, body);
                 yield put(appCreators.setToastMessage('가입이 완료되었습니다.')); // 추후 대응 변경
                 navigate('/'); // 로그인된 상태로 메인화면으로 진입
             } catch (err) {
@@ -38,9 +38,9 @@ export default function* () {
         }),
 
         // 비봉쇄 로그인 읽은 뒤 리팩토링 or not
-        takeLatest(Action.Types.LOGIN, function* ({userInfo}) {
+        takeLatest(Action.Types.LOGIN, function* ({body}) {
             try {
-                const result = yield call(Api.login, userInfo);
+                const result = yield call(Api.login, body);
 
                 // 이메일 인증 완료된 토큰(or error)이면 or navigate('/register-confirm')
                 setAccessToken(result.data.accessToken);

@@ -11,9 +11,9 @@ const FindPw = (props) => {
 
     const onSubmit = async () => {
         try {
-            const values = await form.validateFields();
-            console.log('Success:', values);
-            userCreators.login(values)
+            const body = await form.validateFields();
+            console.log('Success:', body);
+            userCreators.login(body)
         } catch (errorInfo) {
             console.log('Failed:', errorInfo);
         }

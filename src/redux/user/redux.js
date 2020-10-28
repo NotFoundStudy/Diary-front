@@ -8,8 +8,16 @@ export const Action = {
         UPDATE_STATE: '@USER/UPDATE_STATE',
         CLEAR_STORE: '@USER/CLEAR_STORE',
 
-        REGISTER : '@USER/REGISTER',
-        REGISTER_CONFIRM : '@USER/REGISTER_CONFIRM',
+        REGISTER: '@USER/REGISTER',
+        UPDATE_USER: '@USER/UPDATE_USER',
+        DELETE_USER: '@USER/DELETE_USER',
+        REQUEST_CONFIRMATION_CODE: '@USER/REQUEST_CONFIRMATION_CODE',
+        CONFIRMED: '@USER/CONFIRMED',
+        CHECK_EMAIL: '@USER/CHECK_EMAIL',
+        CHECK_STUDENT_ID: '@USER/CHECK_STUDENT_ID',
+        CHANGE_ROLES: '@USER/CHANGE_ROLES',
+        RESET_PASSWORD: '@USER/RESET_PASSWORD',
+
         LOGIN: 'LOGIN',
         LOGOUT: 'LOGOUT',
     },
@@ -22,19 +30,46 @@ export const Action = {
             type: Action.Types.CLEAR_STORE
         }),
 
-        register: (values) => ({
+        register: (body) => ({ // email, password, studentId, name
             type: Action.Types.REGISTER,
-            values
+            body
         }),
-        registerConfirm: (confirmCode) => ({
-            type: Action.Types.REGISTER_CONFIRM,
-            confirmCode
+        updateUser: (body) => ({ // token / name, password
+            type: Action.Types.UPDATE_USER,
+            body
         }),
-        login: (userInfo) => ({
+        deleteUser: () => ({ // token / email 미완성
+            type: Action.Types.DELETE_USER,
+        }),
+        requestConfirmationCode: () => ({ // token
+            type: Action.Types.REQUEST_CONFIRMATION_CODE,
+        }),
+        Confirmed: (body) => ({ // token / confirmation-code
+            type: Action.Types.CONFIRMED,
+            body
+        }),
+        checkEmail: (body) => ({ // email
+            type: Action.Types.CHECK_EMAIL,
+            body
+        }),
+        checkStudentId: (body) => ({ // studentId
+            type: Action.Types.CHECK_STUDENT_ID,
+            body
+        }),
+        changeRoles: (body) => ({ // token / role
+            type: Action.Types.CHANGE_ROLES,
+            body
+        }),
+        resetPassword: (body) => ({ // 미완성
+            type: Action.Types.RESET_PASSWORD,
+            body
+        }),
+
+        login: (body) => ({ // token / userId, password
             type: Action.Types.LOGIN,
-            userInfo
+            body
         }),
-        logout: () => ({ // accessToken - localStorage
+        logout: () => ({
             type: Action.Types.LOGOUT
         }),
     }
