@@ -19,10 +19,7 @@ import Notice from "./pages/Community/Notice";
 import Contact from "./pages/Contact/Contact";
 import Layout from "./components/Layout/Layout";
 import IntroductionWrite from "./pages/Introduction/Introduction/IntroductionWrite";
-import Viewer from "./components/Editor/Viewer";
 import ProfessorWrite from "./pages/Introduction/Professor/ProfessorWrite";
-import Member from "./pages/Member";
-import {appCreators} from "./redux/actionCreators";
 import Auth from "./hoc/Auth";
 import RegisterConfirm from "./pages/Register/RegisterConfirm";
 import FindPw from "./pages/Login/FindPw";
@@ -32,9 +29,6 @@ import CurrentMemberDetail from "./pages/Member/CurrentMember/CurrentMemberDetai
 const App = (props) => {
 
     const {toastMessage} = useSelector(state => state.app);
-    useEffect(() => {
-        // token valid check request => false => navigate('/login')
-    }, [])
 
     return (
         <Wrapper>
@@ -43,14 +37,14 @@ const App = (props) => {
             }
             <Layout>
                 <Switch>
-                    <Route exact path={'/register'} component={Register}/>
-                    <Route exact path={'/register-confirm'} component={RegisterConfirm}/>
-                    <Route exact path={'/find/pw'} component={FindPw}/>
-                    <Route exact path={'/login'} component={Login}/>
+                    <Route exact path={'/register'} component={Auth(Register, null)}/>
+                    <Route exact path={'/register-confirm'} component={Auth(RegisterConfirm, null)}/>
+                    <Route exact path={'/find/pw'} component={Auth(FindPw, null)}/>
+                    <Route exact path={'/login'} component={Auth(Login, null)}/>
 
                     {/* 리다이렉트 처리 : 오타, url에 params 추가 */}
 
-                    <Route exact path={'/'} component={Home}/>
+                    <Route exact path={'/'} component={Auth(Home, null)}/>
 
                     {/* introduction & research */}
                     {/* 컨텐츠 구성 질의, exact path 수정 */}
@@ -61,15 +55,16 @@ const App = (props) => {
                     {/* professor */}
                     {/* 한 분인지, 사이드바에 여러명 추가되는 지 */}
                     <Route exact path={'/professor/write'} component={Auth(ProfessorWrite, true)}/>
-                    <Route path={'/professor'} component={Auth(Professor)}/>
+                    <Route path={'/professor'} component={Auth(Professor,null)}/>
 
                     {/* member */}
-                    <Route path={'/member/current'} component={Auth(CurrentMember, null)}/>
                     <Route path={'/member/current/:id'} component={Auth(CurrentMemberDetail, null)}/>
-                    <Route path={'/member/alumni'} component={Auth(Alumni, null)}/>
+                    <Route exact path={'/member/current'} component={Auth(CurrentMember, null)}/>
+
                     <Route path={'/member/alumni/:id'} component={Auth(Alumni, null)}/>
+                    <Route exact path={'/member/alumni'} component={Auth(Alumni, null)}/>
                     {/* redirect /member to member/current*/}
-                    <Route path={'/member'} component={Auth(Member, null)}/>
+                    {/*<Route path={'/member'} component={Auth(Member, null)}/>*/}
 
                     {/* publications */}
                     <Route path={'/publication'} component={Auth(Publication, null)}/>

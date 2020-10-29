@@ -9,6 +9,8 @@ export default (Component, option, adminRoute = null) => {
     */
     const AuthenticateCheck = (props) => {
         const {isLoggedIn} = useSelector(state => state.user);
+        // const {isLoggedIn} = useSelector(state => state.user);
+        // localStorage   user fetch API 검증
 
         useEffect(() => {
             if (!isLoggedIn && option) { // 로그인 안됐고, 로그인 유저만 출입 가능한 페이지

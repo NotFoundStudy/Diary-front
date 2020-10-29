@@ -18,7 +18,12 @@ const Register = (props) => {
         try {
             const values = await form.validateFields();
             console.log('Success:', values);
-            userCreators.register(values);
+            userCreators.register({
+                email : values.email,
+                password :values.password,
+                studentId : values.studentId,
+                name : values.name,
+            });
         } catch (errorInfo) {
             console.log('Failed:', errorInfo);
         }

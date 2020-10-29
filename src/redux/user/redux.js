@@ -44,7 +44,7 @@ export const Action = {
         requestConfirmationCode: () => ({ // token
             type: Action.Types.REQUEST_CONFIRMATION_CODE,
         }),
-        Confirmed: (body) => ({ // token / confirmation-code
+        confirmed: (body) => ({ // token / confirmation-code
             type: Action.Types.CONFIRMED,
             body
         }),

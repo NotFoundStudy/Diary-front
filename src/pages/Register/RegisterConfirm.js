@@ -17,7 +17,7 @@ const RegisterConfirm = (props) => {
         try {
             const values = await form.validateFields();
             console.log('Success:', values);
-            userCreators.register(values);
+            userCreators.confirmed(values);
         } catch (errorInfo) {
             console.log('Failed:', errorInfo);
         }
