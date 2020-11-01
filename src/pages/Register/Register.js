@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import BasicInfoConstants from '../../constants/basicInfo'
 import {Form, Input, Button, Steps, Mentions, Checkbox,} from 'antd';
 import PageTitle from "../../components/Titles/PageTitle";
 import {userCreators} from "../../redux/actionCreators";
+import {getLocalStorage} from "../../helper/tokenHelper";
 
 const {Search} = Input;
 
@@ -11,23 +12,36 @@ const Register = (props) => {
 
     const [form] = Form.useForm();
 
+    const [initialValues, setInitialValues] = useState(null);
     const [passwordConfirm, setPasswordConfirm] = useState('');
 
-    //async 주의
+    useEffect(() => {
+        let localStorageValues = getLocalStorage('tmp-save-register');
+        setPasswordConfirm(localStorageValues?.password);
+        localStorageValues
+            ? setInitialValues({...localStorageValues, clause1: true})
+            : setInitialValues({clause1: true})
+    }, [])
+
     const onSubmit = async () => {
         try {
             const values = await form.validateFields();
             console.log('Success:', values);
             userCreators.register({
-                email : values.email,
-                password :values.password,
-                studentId : values.studentId,
-                name : values.name,
+                email: values.email,
+                password: values.password,
+                studentId: values.studentId,
+                name: values.name,
             });
         } catch (errorInfo) {
             console.log('Failed:', errorInfo);
         }
     };
+
+    // for inject RIGHT initialValues
+    if(!initialValues){
+        return false;
+    }
 
     return (
         <Wrapper>
@@ -36,12 +50,18 @@ const Register = (props) => {
             <Form
                 form={form}
                 name={'register'}
-                initialValues={{'clause1': true,}}
-                validateMessages={{required: "필수 입력 값 입니다."}}>
+                initialValues={initialValues}//{{'clause1': true,}}
+                validateTrigger={'onBlur'}
+                validateMessages={{required: "필수 입력 값 입니다."}}
+                scrollToFirstError
+                onFieldsChange={(changedFields, allFields) => {
+                    console.log('@@ changedFields', changedFields);
+                }}
+            >
 
                 {/* no need <Form.Item> wrapper*/}
                 <Mentions rows="15"
-                          value="약관을 입력해주세요."/>
+                          value="약관내용 ABC."/>
                 <Form.Item
                     name={'clause1'}
                     valuePropName="checked"
@@ -71,10 +91,9 @@ const Register = (props) => {
                     label={'학번'}
                     rules={[
                         {required: true},
-                        // 몇글자 숫자 Regex
                     ]}
                     colon={false}>
-                    <Input type='text' placeholder='학번 (숫자 8자)'/>
+                    <Input type='text' placeholder='학번'/>
                 </Form.Item>
 
                 <Form.Item
@@ -84,10 +103,10 @@ const Register = (props) => {
                     onChange={(e) => setPasswordConfirm(e.target.value)}
                     rules={[
                         {required: true},
-                        // {pattern: /^[A-Za-z0-9]{6,12}$/, message: '숫자와 문자 포함 형태의 6~12자리로 구성하여 주세요.'},
+                        {max: 30, message: '30자 이내로 구성해주세요.'}
                     ]}
                     colon={false}>
-                    <Input.Password id='password' placeholder={'비밀번호 (숫자와 문자 포함 형태의 6~12자리)'}/>
+                    <Input.Password id='password' placeholder={'비밀번호 (30자 이내)'}/>
                 </Form.Item>
 
                 <Form.Item
