@@ -1,83 +1,81 @@
 import axios from 'axios'
 
 export const Auth = {
-    create: (token = null) => { // 세팅 좀더 만지기
-        const headers = {};
+    create: (token = null) => {
+        const headers = {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin' : '*',
+        };
         if (token) {
             headers['Authorization'] = `Bearer ${token}`;
         }
         return axios.create({
-            baseURL: `${process.env.REACT_APP_API_BASE_URL}api/auth`,
+            baseURL: `${process.env.REACT_APP_API_BASE_URL}/api`,
             headers,
-            timeout: 1000,
+            timeout: 5000,
         });
     },
 };
 
-console.log('@@ `${process.env.REACT_APP_API_BASE_URL}auth`', `${process.env.REACT_APP_API_BASE_URL}api/auth`);
-
-const nonAuthAPI = Auth.create() // /api
-
-console.log('@@ nonAuthAPI', nonAuthAPI);
+const nonAuthAPI = Auth.create()
 
 // email, password, studentId, name
 const register = ({body}) => {
-    console.log('@@ api ', body);
-    return nonAuthAPI.post('/register', body);
+    return nonAuthAPI.post('/auth/register', body);
 }
 
 // name, password
 const updateUser = ({token, body}) => {
     const authAPI = Auth.create(token)
-    return authAPI.put('/user', body);
+    return authAPI.put('/auth/user', body);
 }
 
 // email 미완성
 const deleteUser = ({token, body}) => {
     const authAPI = Auth.create(token)
-    return authAPI.delete('/user');
+    return authAPI.delete('/auth/user');
 }
 
-// confirmation-code - 이메일 재발송 버튼
+// confirmation-code - 인증메일 발송 버튼
 const requestConfirmationCode = ({token}) => {
     const authAPI = Auth.create(token)
-    return authAPI.get('/confirmation-code');
+    return authAPI.get('/auth/confirmation-code');
 }
 
-// confirmation-code
+// confirmation-code 받은 인증코드 확인 버튼
 const confirmed = ({token, body}) => {
     const authAPI = Auth.create(token)
-    return authAPI.put('/confirmation-code', body);
+    return authAPI.put('/auth/confirmation-code', body);
 }
 
 // email
 const checkEmail = ({body}) => {
-    return nonAuthAPI.post('/checkEmail', body);
+    return nonAuthAPI.post('/auth/checkEmail', body);
 }
 
 // studentId
 const checkStudentId = ({body}) => {
-    return nonAuthAPI.post('/checkStudentId', body);
+    return nonAuthAPI.post('/auth/checkStudentId', body);
 }
 
 // role
 const changeRoles = ({token, body}) => {
     const authAPI = Auth.create(token)
-    return authAPI.post('/changeRoles', body);
+    return authAPI.post('/auth/changeRoles', body);
 }
 
 // 미완성
 const resetPassword = ({body}) => {
-    return nonAuthAPI.post('/find/reset-password', body);
+    return nonAuthAPI.post('/auth/find/reset-password', body);
 }
 
 // userId, password
 const login = ({body}) => {
-    return nonAuthAPI.post('/login', body);
+    return nonAuthAPI.post('/auth/login', body);
 
 }
 
-const Api = {
+const Api = { // 객체 생성 시 메모리에 남아있어서 Bad?
     login,
     register,
     updateUser,
