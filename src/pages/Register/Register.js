@@ -1,23 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import BasicInfoConstants from '../../constants/basicInfo'
 import {Form, Input, Button, Steps, Mentions, Checkbox,} from 'antd';
 import PageTitle from "../../components/Titles/PageTitle";
 import {userCreators} from "../../redux/actionCreators";
 import {getLocalStorage} from "../../helper/tokenHelper";
-
-const {Search} = Input;
+import {useSelector} from "react-redux";
+import debounce from "lodash.debounce";
 
 const Register = (props) => {
 
     const [form] = Form.useForm();
 
+    const {validEmail, validStudentId} = useSelector(state => state.user);
+
     const [initialValues, setInitialValues] = useState(null);
-    const [passwordConfirm, setPasswordConfirm] = useState('');
 
     useEffect(() => {
+        // initialValues Setting
         let localStorageValues = getLocalStorage('tmp-save-register');
-        setPasswordConfirm(localStorageValues?.password);
+        // setPasswordConfirm(localStorageValues?.password);
         localStorageValues
             ? setInitialValues({...localStorageValues, clause1: true})
             : setInitialValues({clause1: true})
@@ -38,8 +39,12 @@ const Register = (props) => {
         }
     };
 
+<<<<<<< HEAD
     // for inject RIGHT initialValues
     if(!initialValues){
+=======
+    if (!initialValues) { // for inject RIGHT initialValues
+>>>>>>> da079cf595c665ec6ccd8c067e9bc6f685e38014
         return false;
     }
 
@@ -50,25 +55,21 @@ const Register = (props) => {
             <Form
                 form={form}
                 name={'register'}
-                initialValues={initialValues}//{{'clause1': true,}}
-                validateTrigger={'onBlur'}
+                initialValues={initialValues}
                 validateMessages={{required: "필수 입력 값 입니다."}}
-                scrollToFirstError
-                onFieldsChange={(changedFields, allFields) => {
-                    console.log('@@ changedFields', changedFields);
-                }}
-            >
+                scrollToFirstError>
 
                 {/* no need <Form.Item> wrapper*/}
                 <Mentions rows="15"
-                          value="약관내용 ABC."/>
+                          value="약관내용 ABC"/>
                 <Form.Item
                     name={'clause1'}
                     valuePropName="checked"
                     rules={[
                         {
-                            validator: (_, value) =>
-                                value ? Promise.resolve() : Promise.reject('필수 동의 항목입니다.')
+                            validator: (_, value) => {
+                                return value ? Promise.resolve() : Promise.reject('필수 동의 항목입니다.')
+                            }
                         }
                     ]}
                     style={{marginBottom: '30px'}}>
@@ -78,9 +79,35 @@ const Register = (props) => {
                 <Form.Item
                     name={'email'}
                     label={'학교 이메일'}
+                    validateTrigger={'onBlur'}
+                    shouldUpdate
                     rules={[
                         {required: true},
                         {type: 'email', message: '학교 이메일을 입력해주세요.'},
+                        {
+                            validator:(_, value) => {
+                                console.log('@@ value', value);
+                                if (!value) {
+                                    return Promise.resolve()
+                                }
+                                userCreators.checkEmail({email: value})
+                                console.log('@@ validEmail', validEmail);
+                                return validEmail
+                                    ? Promise.resolve('사용가능한 이메일입니다.')
+                                    : Promise.reject('중복된 이메일입니다.')
+                            }
+                        }
+                        // debounce((_, value) => {
+                        //         console.log('@@ value', value);
+                        //         if (!value) {
+                        //             return Promise.resolve()
+                        //         }
+                        //         userCreators.checkEmail({email: value})
+                        //         return validEmail
+                        //             ? Promise.resolve('사용가능한 이메일입니다.')
+                        //             : Promise.reject('중복된 이메일입니다.')
+                        //     }
+                        //     , 2000)
                     ]}
                     colon={false}>
                     <Input type='text' placeholder='학교 이메일'/>
@@ -99,8 +126,8 @@ const Register = (props) => {
                 <Form.Item
                     name="password"
                     label={'비밀번호'}
-                    value={passwordConfirm}
-                    onChange={(e) => setPasswordConfirm(e.target.value)}
+                    // value={passwordConfirm}
+                    // onChange={(e) => setPasswordConfirm(e.target.value)}
                     rules={[
                         {required: true},
                         {max: 30, message: '30자 이내로 구성해주세요.'}
@@ -114,10 +141,14 @@ const Register = (props) => {
                     label={'비밀번호 확인'}
                     rules={[
                         {required: true},
-                        {
-                            validator: (_, value) =>
-                                value === passwordConfirm ? Promise.resolve() : Promise.reject('비밀번호가 일치하지 않습니다.')
-                        },
+                        ({getFieldValue}) => ({
+                            validator(rule, value) {
+                                if (!value || getFieldValue('password') === value) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject('비밀번호가 일치하지 않습니다.');
+                            },
+                        })
                     ]}
                     colon={false}>
                     <Input.Password id='passwordConfirm' placeholder={'비밀번호 확인'}/>

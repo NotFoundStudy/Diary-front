@@ -5,10 +5,12 @@ import PageTitle from "../../components/Titles/PageTitle";
 import {userCreators} from "../../redux/actionCreators";
 import {AiOutlineMail} from "react-icons/all";
 import {navigate} from "../../helper/historyHelper";
+import {useSelector} from "react-redux";
 
 const Login = (props) => {
 
     const [form] = Form.useForm();
+    const {validLogin} = useSelector(state => state.user);
 
     const onSubmit = async () => {
         try {
@@ -24,10 +26,6 @@ const Login = (props) => {
         <Wrapper>
             <PageTitle title={'로그인'}/>
 
-            {/*<div className="guide">*/}
-            {/*    <p>학번 또는 학교 이메일로 로그인해주세요.</p>*/}
-            {/*</div>*/}
-
             <Form
                 form={form}
                 name="login"
@@ -35,23 +33,49 @@ const Login = (props) => {
                 <Form.Item
                     name="userId"
                     label={'학번/이메일'}
+                    validateTrigger={'onSubmit'}
                     rules={[
                         {required: true},
-                        // {type: 'email', message: '예) aaa@university.com'}
+                        // {
+                        //     validator:(_, value) => {
+                        //         console.log('@@ value', value);
+                        //         if (!value) {
+                        //             return Promise.resolve()
+                        //         }
+                        //         return validId
+                        //             ? Promise.resolve('')
+                        //             : Promise.reject('유효하지 않은 학번/이메일입니다.')
+                        //     }
+                        // }
                     ]}
                     colon={false}>
-                    <Input id='userId' placeholder={'학번 또는 학교 이메일'}/>
+                    <Input placeholder={'학번 또는 학교 이메일'}/>
                 </Form.Item>
                 <Form.Item
                     name="password"
                     label={'비밀번호'}
                     rules={[
                         {required: true},
-                        // {pattern: /^[A-Za-z0-9]{6,12}$/, message: '비밀번호는 숫자와 문자 포함 형태의 6~12자리입니다.'},
+                        {max: 30, message: '30자 이내로 구성해주세요.'},
+                        // {
+                        //     validator:(_, value) => {
+                        //         console.log('@@ value', value);
+                        //         if (!value) {
+                        //             return Promise.resolve()
+                        //         }
+                        //         return validId
+                        //             ? Promise.resolve('')
+                        //             : Promise.reject('유효하지 않은 비밀번호입니다.')
+                        //     }
+                        // }
                         ]}
                     colon={false}>
-                    <Input.Password id='password' placeholder={'비밀번호'}/>
+                    <Input.Password placeholder={'비밀번호 (30자 이내)'}/>
                 </Form.Item>
+
+                {
+                    validLogin && <p>{validLogin}</p>
+                }
 
                 <Form.Item>
                     <SubmitButton htmlType={'submit'} onClick={onSubmit} type={'primary'} block>

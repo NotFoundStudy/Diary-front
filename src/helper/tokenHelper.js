@@ -1,13 +1,15 @@
+// localStorage - token
 export const setAccessToken = (value) => {
-    window.localStorage.setItem('accessToken', value);
+   return window.localStorage.setItem('accessToken', value);
 }
 
 export const getAccessToken = () => {
-    window.localStorage.getItem('accessToken');
+    return window.localStorage.getItem('accessToken');
 }
 
+// localStorage - common
 export const setLocalStorage = (key, value) => {
-    window.localStorage.setItem(key, value);
+    return window.localStorage.setItem(key, JSON.stringify(value));
 }
 
 export const getLocalStorage = (key) => {
@@ -15,3 +17,9 @@ export const getLocalStorage = (key) => {
     // if error, add 'type check convert : obj | others(string, ...)'
     return JSON.parse(result);
 }
+
+export const removeLocalStorageItem = (key) => {
+    return window.localStorage.removeItem(key);
+}
+
+

@@ -1,5 +1,8 @@
 const initialState = {
-    user: null,
+    user: null, // logged in user data
+    validEmail: null, // register process
+    validStudentId: null, // register process
+    validLogin: null, // login process
 };
 
 // login 관련 state
