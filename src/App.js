@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styled from "styled-components";
-import {Switch, Route, Redirect} from "react-router-dom";
+import {Switch, Route} from "react-router-dom";
 import {useSelector} from "react-redux";
 import ToastMessage from "./components/ToastMessage/ToastMessage";
 import Page404 from "./pages/Error/Page404";
@@ -11,20 +11,18 @@ import Introduction from "./pages/Introduction/Introduction/Introduction";
 import Professor from "./pages/Introduction/Professor/Professor";
 import CurrentMember from "./pages/Member/CurrentMember/CurrentMember";
 import Alumni from "./pages/Member/Alumni/Alumni";
-import Research from "./pages/Research/Research";
 import Publication from "./pages/Publication/Publication";
 import Lecture from "./pages/Lecture/Lecture";
 import Gallery from "./pages/Community/Gallery";
 import Notice from "./pages/Community/Notice";
-import Contact from "./pages/Contact/Contact";
 import Layout from "./components/Layout/Layout";
 import IntroductionWrite from "./pages/Introduction/Introduction/IntroductionWrite";
 import ProfessorWrite from "./pages/Introduction/Professor/ProfessorWrite";
 import Auth from "./hoc/Auth";
 import RegisterConfirm from "./pages/Register/RegisterConfirm";
 import FindPw from "./pages/Login/FindPw";
-import List from "./components/Post/PhotoPost/List";
 import CurrentMemberDetail from "./pages/Member/CurrentMember/CurrentMemberDetail";
+import Research from "./pages/Introduction/Introduction/Research";
 
 const App = (props) => {
 
@@ -39,8 +37,9 @@ const App = (props) => {
                 <Switch>
                     <Route exact path={'/register'} component={Auth(Register, null)}/>
                     <Route exact path={'/register-confirm'} component={Auth(RegisterConfirm, null)}/>
-                    <Route exact path={'/find/pw'} component={Auth(FindPw, null)}/>
                     <Route exact path={'/login'} component={Auth(Login, null)}/>
+                    <Route exact path={'/find/pw'} component={Auth(FindPw, null)}/>
+                    {/*<Route exact path={'/user/edit'} component={Auth(EditProfile, null)}/>*/}
 
                     {/* 리다이렉트 처리 : 오타, url에 params 추가 */}
 
@@ -64,7 +63,6 @@ const App = (props) => {
 
                     <Route path={'/member/alumni/:id'} component={Auth(Alumni, null)}/>
                     <Route exact path={'/member/alumni'} component={Auth(Alumni, null)}/>
-                    {/* redirect /member to member/current*/}
                     {/*<Route path={'/member'} component={Auth(Member, null)}/>*/}
 
                     {/* publications */}
@@ -78,9 +76,6 @@ const App = (props) => {
                     <Route exact path={'/community/gallery'} component={Auth(Gallery, null)}/>
                     <Route exact path={'/community/notice'} component={Auth(Notice, null)}/>
                     {/*<Route exact path={'/community/board'} component={Auth(Board, null}/>*/}
-
-                    {/* contact */}
-                    <Route exact path={'/contact'} component={Auth(Contact, null)}/>
 
                     {/*<Route path={'/error/404'} component={Auth(Page404, null)}/>*/}
                     {/*<Redirect to={'/error/404'}/>*/}
