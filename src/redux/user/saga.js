@@ -1,4 +1,4 @@
-import {all, call, fork, put, take, takeLatest} from '@redux-saga/core/effects';
+import {all, call, delay, put, takeLatest} from '@redux-saga/core/effects';
 import {
     getLocalStorage,
     setLocalStorage,
@@ -14,26 +14,41 @@ export default function* () {
     yield all([
         takeLatest(Action.Types.CHECK_EMAIL, function* ({body}) {
             try {
+                yield delay(2000);
                 const result = yield call(registerApi.checkEmail, {body});
-                console.log('@@ [saga]CHECK_EMAIL - result', result);
+                console.log('@@ [saga]CHECK_EMAIL_result', result);
                 if (result.data.message === 'email is duplicated') {
-                    console.log('@@ 중복');
+                    // console.log('@@ 중복');
                     yield put(userCreators.updateState({validEmail: false}))
-                    // return false;
                 } else {
-                    console.log('@@ 안 중복');
+                    // console.log('@@ 가능');
                     yield put(userCreators.updateState({validEmail: true}))
-                    // return true;
                 }
             } catch (err) {
-                console.log('@@ [saga]CONFIRMED - err', err);
+                console.log('@@ [saga]CHECK_EMAIL_err', err);
+            }
+        }),
+        takeLatest(Action.Types.CHECK_STUDENT_ID, function* ({body}) {
+            try {
+                yield delay(2000);
+                const result = yield call(registerApi.checkStudentId, {body});
+                console.log('@@ [saga]CHECK_STUDENT_ID_result', result);
+                if (result.data.message === 'studentId is duplicated') {
+                    console.log('@@ 중복');
+                    yield put(userCreators.updateState({validStudentId: false}))
+                } else {
+                    console.log('@@ 안 중복');
+                    yield put(userCreators.updateState({validStudentId: true}))
+                }
+            } catch (err) {
+                console.log('@@ [saga]CHECK_EMAIL_err', err);
             }
         }),
         takeLatest(Action.Types.REGISTER, function* ({body}) {
             try {
                 // 정보 정상 입력 => toast : '등록 성공' => res: token => localStorage에 저장
                 const result = yield call(registerApi.register, {body});
-                console.log('@@ [saga]REGISTER - result', result);
+                console.log('@@[saga]REGISTER - result', result);
 
                 // already exist email 이런 부분은 front에서 제거해서 여기서는 체크 x
 
