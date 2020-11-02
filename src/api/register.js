@@ -1,6 +1,5 @@
-import {Auth} from './Auth'
+import {Auth, nonAuthAPI} from './Auth'
 
-const nonAuthAPI = Auth.create();
 // email
 const checkEmail = ({body}) => {
     return nonAuthAPI.post('/auth/checkEmail', body);

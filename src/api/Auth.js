@@ -15,3 +15,5 @@ export const Auth = {
         });
     },
 };
+
+export const nonAuthAPI = Auth.create();
