@@ -1,61 +1,48 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-
-import TuiEditor from 'tui-editor';
+import {Input, Switch} from 'antd'
+import { Editor as TestEdit} from "@toast-ui/react-editor";
 import 'tui-editor/dist/tui-editor.css'; // editor's ui
 import 'tui-editor/dist/tui-editor-contents.css'; // editor's content
 import 'codemirror/lib/codemirror.css'; // codemirror
 
-const Editor = (props) => {
-
-    const [editorEl, setEditorEl] = useState(null);
-
-    useEffect(()=>{
-        setEditorEl(
-            new TuiEditor({
-                el: document.querySelector('#editorSection'),
-                hideModeSwitch: true,
-                initialEditType: 'markdown', // wysiwyg
-                previewStyle: 'vertical',
-                height: '300px',
-                events: {
-                    // load : '',
-                    // change: '',
-                    // stateChange: '',
-                    focus: () => console.log('@@ focus'),
-                    blur:  () => console.log('@@ blur')
-                },
-                hooks: {
-                    addImageBlobHook: () => console.log('@@ abc'), // type [addImageBlobHook] ?
-                }
-            })
-        );
-        // editorEl.getHtml();
-    },[])
-    
-    useEffect(()=>{
-        if(editorEl){
-            console.log('@@ editorEl.getUI().getToolbar()', editorEl.getUI().getToolbar());
-            console.log('@@ eidotrEl.getCodeMirror()', editorEl.getCodeMirror());
-            console.log('@@ editorEl.getCurrentModeEditor()', editorEl.getCurrentModeEditor());
-            console.log('@@ editorEl.getCurrentPreviewStyle()', editorEl.getCurrentPreviewStyle());
-            console.log('@@ editorEl.getHtml()', editorEl.getHtml());
-            console.log('@@ editorEl.getRange()', editorEl.getRange());
-            console.log('@@ editorEl.getSelectedText()', editorEl.getSelectedText());
-            console.log('@@ editorEl.getSquire()', editorEl.getSquire());
-            console.log('@@ editorEl.getUI()', editorEl.getUI());
-        }
-
-    },[editorEl])
-
+const Editor = ({editorRef, onChangeTitle, onChangePassword, isSecret, onChangeIsSecret}) => {    
     return (
         <Wrapper>
-            <div id="editorSection"></div>
+            <ComponentWrapper>
+                <Input id='title' placeholder='제목' onChange={onChangeTitle}/>
+            </ComponentWrapper>
+
+            <ComponentWrapper>
+                <Switch 
+                    onChange={onChangeIsSecret}
+                    checkedChildren="비밀글" 
+                    unCheckedChildren="공개글" 
+                />
+                <Input id='password' disabled={!isSecret} placeholder='비밀번호' onChange={onChangePassword} />
+            </ComponentWrapper>
+            
+
+            <ComponentWrapper>
+                <TestEdit
+                    hideModeSwitch={true}
+                    previewStyle="vertical"
+                    width='100%'
+                    height="600px"
+                    initialEditType="wysiwyg"
+                    placeholder="글쓰기"
+                    ref={editorRef}
+                    />
+            </ComponentWrapper>
         </Wrapper>
     )
 };
 
 const Wrapper = styled.div`
+`;
+
+const ComponentWrapper = styled.div`
+    margin-bottom: 20px;
 `;
 
 export default Editor;

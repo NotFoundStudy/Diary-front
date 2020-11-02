@@ -49,7 +49,8 @@ const App = (props) => {
                     {/* introduction & research */}
                     {/* 컨텐츠 구성 질의, exact path 수정 */}
                     <Route exact path={'/introduction'} component={Auth(Introduction, null)}/>
-                    <Route exact path={'/introduction/write'} component={Auth(IntroductionWrite, true)}/>
+                    {/* auth true였음 */}
+                    <Route exact path={'/introduction/write'} component={IntroductionWrite}/> 
                     <Route exact path={'/research'} component={Auth(Research, null)}/>
 
                     {/* professor */}

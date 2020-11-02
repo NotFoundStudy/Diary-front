@@ -1,21 +1,5 @@
 import axios from 'axios'
-
-export const Auth = {
-    create: (token = null) => {
-        const headers = {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin' : '*',
-        };
-        if (token) {
-            headers['Authorization'] = `Bearer ${token}`;
-        }
-        return axios.create({
-            baseURL: `${process.env.REACT_APP_API_BASE_URL}/api`,
-            headers,
-            timeout: 5000,
-        });
-    },
-};
+import {Auth} from './Auth'
 
 const nonAuthAPI = Auth.create() // /api
 
