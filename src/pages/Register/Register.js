@@ -39,12 +39,7 @@ const Register = (props) => {
         }
     };
 
-<<<<<<< HEAD
-    // for inject RIGHT initialValues
-    if(!initialValues){
-=======
     if (!initialValues) { // for inject RIGHT initialValues
->>>>>>> da079cf595c665ec6ccd8c067e9bc6f685e38014
         return false;
     }
 
