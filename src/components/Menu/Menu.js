@@ -22,24 +22,25 @@ const sampleList = [
 ]
 const Menu = (props) => {
     const {
-        mode = 'horizontal', // vertical | horizontal | inline
+        mode = 'horizontal', // vertical, horizontal, inline
         style,
         className,
-        list,
+        list
     } = props;
 
-    // localstorage등 에서 가져와서 하기 defaultSelcted등 세팅(여기서 하기)
-
-    function recursiveMenu(subMenu) {
+    const recursiveMenu = (subMenu) => {
         subMenu.map(menu => <>
                 {
                     menu.sub_menu
                         ? recursiveMenu(menu.sub_menu)
                         : <AntdMenu.Item key={menu.key}>{menu.name}</AntdMenu.Item>
-
                 }
             </>
         )
+    }
+
+    if(!list){
+        return false;
     }
 
     return (
@@ -53,7 +54,7 @@ const Menu = (props) => {
             style={style}
         >
             {
-                list.map(item =>
+                list?.map(item =>
                     item.sub_menu.length > 0
                         ? <SubMenu key={item.key} icon={item.icon} title={item.name}>
                             {/*{*/}

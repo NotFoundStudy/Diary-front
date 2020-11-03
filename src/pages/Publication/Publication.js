@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from "styled-components";
 import {Collapse, Table, Tabs} from "antd";
 import PublicationItems from "./components/PublicationItems";
 import {mock} from "../../mock/mock";
 import PageTitle from "../../components/Titles/PageTitle";
+import {appCreators} from '../../redux/actionCreators'
 
 const {TabPane} = Tabs;
 const {Panel} = Collapse;
@@ -42,7 +43,10 @@ const tabFrame = [
 const Publication = (props) => {
 
     const list = mock.publication[0].data;
-    console.log('@@ list', list);
+
+    useEffect(()=>{
+        appCreators.setSideMenu('Publication')
+    },[])
 
     return (
         <Wrapper>

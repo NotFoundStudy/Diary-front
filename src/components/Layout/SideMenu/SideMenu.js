@@ -1,21 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import styled from "styled-components";
-import {Col} from "antd";
 import Menu from "../../Menu/Menu";
-import {useSelector} from "react-redux";
 
-const Sidebar = (props) => {
+const SideMenu = (props) => {
 
     const {
-        list
+        menu
     } = props;
 
-    return (
+    return menu && (
         <>
-            <MenuHead>{list?.head}</MenuHead>
-            <StyledMenu list={list?.list}
-                        mode={'inline'}
-                        subMenuOpenDelay={0}/>
+            <MenuHead>{menu.head}</MenuHead>
+            <StyledMenu mode={'inline'}
+                        subMenuOpenDelay={0}
+                        list={menu.list}/>
         </>
     )
 };
@@ -59,4 +57,4 @@ const MenuHead = styled.div`
   font-weight: 600;
   color:#fff;
 `;
-export default Sidebar;
+export default SideMenu;
