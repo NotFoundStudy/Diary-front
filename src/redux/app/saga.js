@@ -1,7 +1,6 @@
 import {takeLatest, call, put, delay, spawn} from '@redux-saga/core/effects';
 import {Action} from "./redux";
 import {appCreators} from "../actionCreators";
-import API from "../../api/index2";
 
 export default function* () {
     // to use in saga function

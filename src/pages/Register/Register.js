@@ -74,14 +74,12 @@ const Register = (props) => {
                 <Form.Item
                     name={'email'}
                     label={'학교 이메일'}
-                    validateTrigger={'onBlur'}
                     shouldUpdate
                     rules={[
                         {required: true},
                         {type: 'email', message: '학교 이메일을 입력해주세요.'},
                         {
                             validator:(_, value) => {
-                                console.log('@@ value', value);
                                 if (!value) {
                                     return Promise.resolve()
                                 }
@@ -92,17 +90,6 @@ const Register = (props) => {
                                     : Promise.reject('중복된 이메일입니다.')
                             }
                         }
-                        // debounce((_, value) => {
-                        //         console.log('@@ value', value);
-                        //         if (!value) {
-                        //             return Promise.resolve()
-                        //         }
-                        //         userCreators.checkEmail({email: value})
-                        //         return validEmail
-                        //             ? Promise.resolve('사용가능한 이메일입니다.')
-                        //             : Promise.reject('중복된 이메일입니다.')
-                        //     }
-                        //     , 2000)
                     ]}
                     colon={false}>
                     <Input type='text' placeholder='학교 이메일'/>
@@ -111,8 +98,21 @@ const Register = (props) => {
                 <Form.Item
                     name={'studentId'}
                     label={'학번'}
+                    shouldUpdate
                     rules={[
                         {required: true},
+                        {
+                            validator:(_, value) => {
+                                if (!value) {
+                                    return Promise.resolve()
+                                }
+                                userCreators.checkStudentId({studentId: value})
+                                console.log('@@ validStudentId', validStudentId);
+                                return validStudentId
+                                    ? Promise.resolve('사용가능한 학번입니다.')
+                                    : Promise.reject('중복된 학번입니다.')
+                            }
+                        }
                     ]}
                     colon={false}>
                     <Input type='text' placeholder='학번'/>

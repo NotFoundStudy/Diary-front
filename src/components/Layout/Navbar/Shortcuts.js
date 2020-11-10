@@ -12,7 +12,7 @@ const Shortcuts = (props) => {
         <Wrapper style={style}>
             {
                 list.map(item =>
-                <Link href={item.to}>{item.name}</Link>)
+                <Link href={item.to} key={item.to}>{item.name}</Link>)
             }
         </Wrapper>
     )

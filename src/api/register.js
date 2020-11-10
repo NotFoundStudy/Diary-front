@@ -1,6 +1,5 @@
-import {Auth} from './Auth'
+import {Auth, nonAuthAPI} from './Auth'
 
-const nonAuthAPI = Auth.create();
 // email
 const checkEmail = ({body}) => {
     return nonAuthAPI.post('/auth/checkEmail', body);
@@ -59,8 +58,7 @@ const resetPassword = ({body}) => {
     return nonAuthAPI.post('/auth/find/reset-password', body);
 }
 
-
-const Api = { // 객체 생성 시 메모리에 남아있어서 Bad?
+const registerApi = {
     login,
     register,
     updateUser,
@@ -73,4 +71,4 @@ const Api = { // 객체 생성 시 메모리에 남아있어서 Bad?
     resetPassword,
 };
 
-export default Api;
+export default registerApi;
