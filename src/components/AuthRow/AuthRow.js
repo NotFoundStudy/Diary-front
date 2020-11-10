@@ -1,4 +1,4 @@
-import {React, memo} from 'react'
-import {Input} from 'antd'
+import { React, memo } from "react";
+import { Input } from "antd";
 
-const AuthRow = ({})
+const AuthRow = {};

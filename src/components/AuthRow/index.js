@@ -1,3 +1,3 @@
-import AuthRow from './AuthRow'
+import AuthRow from "./AuthRow";
 
 export default AuthRow;

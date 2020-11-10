@@ -1,16 +1,9 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
 const Container = (props) => {
-const{
-    children,
-    style
-} = props;
-    return (
-        <Wrapper style={style}>
-            {children}
-        </Wrapper>
-    )
+  const { children, style } = props;
+  return <Wrapper style={style}>{children}</Wrapper>;
 };
 
 const Wrapper = styled.div`

@@ -1,19 +1,15 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
 const UserThumb = (props) => {
+  const { name, src } = props;
 
-    const {
-        name,
-        src,
-    } = props;
-    
-    return (
-        <Wrapper>
-           <Thumb src={src}/>
-           <Name>{name}</Name>
-        </Wrapper>
-    )
+  return (
+    <Wrapper>
+      <Thumb src={src} />
+      <Name>{name}</Name>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
@@ -31,7 +27,7 @@ const Thumb = styled.img`
 const Name = styled.div`
   margin-top: 4px;
   font-weight: 700;
-  color:#fff;
+  color: #fff;
 `;
 
 export default UserThumb;

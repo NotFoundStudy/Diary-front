@@ -1,16 +1,15 @@
-import React from 'react';
-import styled, {keyframes} from "styled-components";
-import {AiOutlineLoading3Quarters} from "react-icons/all";
+import React from "react";
+import styled, { keyframes } from "styled-components";
+import { AiOutlineLoading3Quarters } from "react-icons/all";
 
 const Loading = (props) => {
-
-    return (
-        <Wrapper>
-            <Rotate>
-                <AiOutlineLoading3Quarters/>
-            </Rotate>
-        </Wrapper>
-    )
+  return (
+    <Wrapper>
+      <Rotate>
+        <AiOutlineLoading3Quarters />
+      </Rotate>
+    </Wrapper>
+  );
 };
 
 const rotate = keyframes`
@@ -30,7 +29,6 @@ const Rotate = styled.div`
   font-size: 1.2rem;
 `;
 
-const Wrapper = styled.div`
-`;
+const Wrapper = styled.div``;
 
 export default Loading;

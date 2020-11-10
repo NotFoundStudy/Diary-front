@@ -1,34 +1,28 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 import List from "./List";
 import BackButton from "../../Button/BackButton";
-import {Col, Row} from "antd";
+import { Col, Row } from "antd";
 import Attachment from "../components/Attachment";
 import PostTitle from "../components/PostTitle";
 
 const Detail = (props) => {
-    const {
-        item,
-        list
-    } = props;
+  const { item, list } = props;
 
-    return (
-        <Wrapper>
-            <DetailWrap>
-                <PostTitle item={item}/>
-                <ContentBody>
-                    asdf
-                </ContentBody>
-                <Attachment list={item.attachment}/>
-                <BackButton/>
-            </DetailWrap>
-            <List list={list}/>
-        </Wrapper>
-    )
+  return (
+    <Wrapper>
+      <DetailWrap>
+        <PostTitle item={item} />
+        <ContentBody>asdf</ContentBody>
+        <Attachment list={item.attachment} />
+        <BackButton />
+      </DetailWrap>
+      <List list={list} />
+    </Wrapper>
+  );
 };
 
-const Wrapper = styled.div`
-`;
+const Wrapper = styled.div``;
 const DetailWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,6 +31,5 @@ const DetailWrap = styled.div`
 const ContentBody = styled.div`
   padding: 30px 0;
 `;
-
 
 export default Detail;

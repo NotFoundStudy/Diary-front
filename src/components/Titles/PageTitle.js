@@ -1,18 +1,17 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
 const PageTitle = (props) => {
+  const {
+    title,
+    color, // title font color
+  } = props;
 
-    const {
-        title,
-        color, // title font color
-    } = props;
-
-    return (
-        <Wrapper>
-            <Title color={color}>{title}</Title>
-        </Wrapper>
-    )
+  return (
+    <Wrapper>
+      <Title color={color}>{title}</Title>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
@@ -33,8 +32,7 @@ const Title = styled.span`
   text-transform: capitalize;
   font-size: 1.5rem; //37px;
   font-weight: 600;
-  color: ${props => props.color || '#2d2d2d'};
+  color: ${(props) => props.color || "#2d2d2d"};
 `;
-
 
 export default PageTitle;

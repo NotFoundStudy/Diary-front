@@ -1,38 +1,38 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
-import {navigate} from "../../../helper/historyHelper";
-import {appCreators} from "../../../redux/actionCreators";
+import { navigate } from "../../../helper/historyHelper";
+import { appCreators } from "../../../redux/actionCreators";
 
 const Post = (props) => {
-    const {
-        item,
-    } = props;
+  const { item } = props;
 
-    return (
-        <Wrapper onClick={() => {
-            navigate(`/member/current/${item.id}`)
-        }}>
-            <Thumb src={item.thumbnail}/>
-            <Desc>
-                <p className={'title'}>{item.name}</p>
-                <p>
-                    <span className={'key dot'}>직위(직급)</span>
-                    <span>{item.position}</span>
-                </p>
-                <p>
-                    <span className={'key dot'}>연구분야</span>
-                    <span>{item.field}</span>
-                </p>
-            </Desc>
-        </Wrapper>
-    )
+  return (
+    <Wrapper
+      onClick={() => {
+        navigate(`/member/current/${item.id}`);
+      }}
+    >
+      <Thumb src={item.thumbnail} />
+      <Desc>
+        <p className={"title"}>{item.name}</p>
+        <p>
+          <span className={"key dot"}>직위(직급)</span>
+          <span>{item.position}</span>
+        </p>
+        <p>
+          <span className={"key dot"}>연구분야</span>
+          <span>{item.field}</span>
+        </p>
+      </Desc>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
   display: flex;
   padding: 0.8em;
-  border-bottom:1px solid #ddd;
-  cursor:pointer;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
 `;
 const Thumb = styled.img`
   width: 110px;
@@ -41,36 +41,36 @@ const Thumb = styled.img`
 `;
 const Desc = styled.div`
   flex-grow: 1;
-  p{
+  p {
     margin: 0;
-    &.title{
+    &.title {
       margin-bottom: 5px;
       padding-left: 6px;
       font-size: 15px;
       font-weight: 600;
-      color:#133183;
+      color: #133183;
     }
   }
-  span{
+  span {
     font-size: 14px;
-    color:#848484;
-    &.key{
+    color: #848484;
+    &.key {
       padding-right: 10px;
       font-weight: 600;
-      color:#000;
+      color: #000;
     }
-    &.dot{
+    &.dot {
       position: relative;
       padding-left: 8px;
       &:before {
-        content: '';
+        content: "";
         position: absolute;
         left: 0;
         top: 50%;
         transform: translateY(-50%);
         width: 2px;
         height: 2px;
-        background:#525252;
+        background: #525252;
       }
     }
   }

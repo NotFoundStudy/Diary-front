@@ -1,16 +1,10 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
 const CurrentMemberWrite = (props) => {
-
-    return (
-        <Wrapper>
-           CurrentMemberWrite
-        </Wrapper>
-    )
+  return <Wrapper>CurrentMemberWrite</Wrapper>;
 };
 
-const Wrapper = styled.div`
-`;
+const Wrapper = styled.div``;
 
 export default CurrentMemberWrite;

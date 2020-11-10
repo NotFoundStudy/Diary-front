@@ -1,9 +1,8 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
-import {Switch, Route} from "react-router-dom";
-import {useSelector} from "react-redux";
+import { Switch, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 import ToastMessage from "./components/ToastMessage/ToastMessage";
-import Page404 from "./pages/Error/Page404";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
@@ -25,67 +24,94 @@ import CurrentMemberDetail from "./pages/Member/CurrentMember/CurrentMemberDetai
 import Research from "./pages/Introduction/Introduction/Research";
 
 const App = (props) => {
+  const { toastMessage } = useSelector((state) => state.app);
 
-    const {toastMessage} = useSelector(state => state.app);
+  return (
+    <Wrapper>
+      {toastMessage && <ToastMessage message={toastMessage} />}
+      <Layout>
+        <Switch>
+          <Route exact path="/register" component={Auth(Register, null)} />
+          <Route
+            exact
+            path="/register-confirm"
+            component={Auth(RegisterConfirm, null)}
+          />
+          <Route exact path="/login" component={Auth(Login, null)} />
+          <Route exact path="/find/pw" component={Auth(FindPw, null)} />
+          {/* <Route exact path={'/user/edit'} component={Auth(EditProfile, null)}/> */}
 
-    return (
-        <Wrapper>
-            {
-                toastMessage && <ToastMessage message={toastMessage}/>
-            }
-            <Layout>
-                <Switch>
-                    <Route exact path={'/register'} component={Auth(Register, null)}/>
-                    <Route exact path={'/register-confirm'} component={Auth(RegisterConfirm, null)}/>
-                    <Route exact path={'/login'} component={Auth(Login, null)}/>
-                    <Route exact path={'/find/pw'} component={Auth(FindPw, null)}/>
-                    {/*<Route exact path={'/user/edit'} component={Auth(EditProfile, null)}/>*/}
+          {/* 리다이렉트 처리 : 오타, url에 params 추가 */}
 
-                    {/* 리다이렉트 처리 : 오타, url에 params 추가 */}
+          <Route exact path="/" component={Auth(Home, null)} />
 
-                    <Route exact path={'/'} component={Auth(Home, null)}/>
+          {/* introduction & research */}
+          {/* 컨텐츠 구성 질의, exact path 수정 */}
+          <Route
+            exact
+            path="/introduction"
+            component={Auth(Introduction, null)}
+          />
+          {/* auth true였음 */}
+          <Route
+            exact
+            path="/introduction/write"
+            component={IntroductionWrite}
+          />
+          <Route exact path="/research" component={Auth(Research, null)} />
 
-                    {/* introduction & research */}
-                    {/* 컨텐츠 구성 질의, exact path 수정 */}
-                    <Route exact path={'/introduction'} component={Auth(Introduction, null)}/>
-                    {/* auth true였음 */}
-                    <Route exact path={'/introduction/write'} component={IntroductionWrite}/> 
-                    <Route exact path={'/research'} component={Auth(Research, null)}/>
+          {/* professor */}
+          {/* 한 분인지, 사이드바에 여러명 추가되는 지 */}
+          <Route
+            exact
+            path="/professor/write"
+            component={Auth(ProfessorWrite, true)}
+          />
+          <Route path="/professor" component={Auth(Professor, null)} />
 
-                    {/* professor */}
-                    {/* 한 분인지, 사이드바에 여러명 추가되는 지 */}
-                    <Route exact path={'/professor/write'} component={Auth(ProfessorWrite, true)}/>
-                    <Route path={'/professor'} component={Auth(Professor,null)}/>
+          {/* member */}
+          <Route
+            path="/member/current/:id"
+            component={Auth(CurrentMemberDetail, null)}
+          />
+          <Route
+            exact
+            path="/member/current"
+            component={Auth(CurrentMember, null)}
+          />
 
-                    {/* member */}
-                    <Route path={'/member/current/:id'} component={Auth(CurrentMemberDetail, null)}/>
-                    <Route exact path={'/member/current'} component={Auth(CurrentMember, null)}/>
+          <Route path="/member/alumni/:id" component={Auth(Alumni, null)} />
+          <Route exact path="/member/alumni" component={Auth(Alumni, null)} />
+          {/* <Route path={'/member'} component={Auth(Member, null)}/> */}
 
-                    <Route path={'/member/alumni/:id'} component={Auth(Alumni, null)}/>
-                    <Route exact path={'/member/alumni'} component={Auth(Alumni, null)}/>
-                    {/*<Route path={'/member'} component={Auth(Member, null)}/>*/}
+          {/* publications */}
+          <Route path="/publication" component={Auth(Publication, null)} />
 
-                    {/* publications */}
-                    <Route path={'/publication'} component={Auth(Publication, null)}/>
+          {/* lecture */}
+          <Route path="/lecture" component={Auth(Lecture, null)} />
+          <Route exact path="/lecture/:name" component={Auth(Lecture, null)} />
 
-                    {/* lecture */}
-                    <Route path={'/lecture'} component={Auth(Lecture, null)}/>
-                    <Route exact path={'/lecture/:name'} component={Auth(Lecture, null)}/>
+          {/* community */}
+          <Route
+            exact
+            path="/community/gallery"
+            component={Auth(Gallery, null)}
+          />
+          <Route
+            exact
+            path="/community/notice"
+            component={Auth(Notice, null)}
+          />
+          {/* <Route exact path={'/community/board'} component={Auth(Board, null}/> */}
 
-                    {/* community */}
-                    <Route exact path={'/community/gallery'} component={Auth(Gallery, null)}/>
-                    <Route exact path={'/community/notice'} component={Auth(Notice, null)}/>
-                    {/*<Route exact path={'/community/board'} component={Auth(Board, null}/>*/}
-
-                    {/*<Route path={'/error/404'} component={Auth(Page404, null)}/>*/}
-                    {/*<Redirect to={'/error/404'}/>*/}
-                </Switch>
-            </Layout>
-        </Wrapper>
-    )
+          {/* <Route path={'/error/404'} component={Auth(Page404, null)}/> */}
+          {/* <Redirect to={'/error/404'}/> */}
+        </Switch>
+      </Layout>
+    </Wrapper>
+  );
 };
 
-const Wrapper = styled.div`
-`;
+const Wrapper = styled.div``;
 
 export default App;
