@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const Auth = {
+export const auth = {
     create: (token = null) => {
         const headers = {
             'Content-Type': 'application/json',

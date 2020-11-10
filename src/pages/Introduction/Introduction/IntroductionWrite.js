@@ -13,19 +13,19 @@ const IntroductionWrite = (props) => {
     const [password, setPassword] = useState('');
 
     const onClickWriteBtn = () => {
-        const post = editorRef.current.getInstance().getHtml();
+        const contents = editorRef.current.getInstance().getHtml();
 
-        if(title && post){
+        if(title && contents){
             const body = {
                 password,
                 isSecret,
                 title,
-                post
+                contents
             }
             editorCreators.insert(body)
         }else{
             // toast 메세지 출력
-            console.log(`title : ${title}, post : ${post}`)
+            console.log(`title : ${title}, contents : ${contents}`)
         }
     }
 

@@ -1,8 +1,7 @@
-import axios from 'axios'
-import {Auth} from './Auth'
+import {auth} from './auth'
 
 const insert = async ({title, contents, userId, isSecret, password, token}) => {
-    const api = Auth.create(token);
+    const api = auth.create(token);
     const body = {
         userId,
         title,
@@ -10,10 +9,11 @@ const insert = async ({title, contents, userId, isSecret, password, token}) => {
         isSecret,
         password,
     }
-    const res = await api.post('/create-board', body);
+    const res = await api.post('/board/create-board', body);
+    console.log(res);
     return res;
 }
 
-export const editor = {
+export const editorApi = {
     insert,
 }

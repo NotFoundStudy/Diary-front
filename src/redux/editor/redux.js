@@ -4,8 +4,8 @@ const initialState = {
 
 export const Action = {
     Types : {
-        UPDATE_STATE: '@USER/UPDATE_STATE',
-        CLEAR_STORE: '@USER/CLEAR_STORE',
+        UPDATE_STATE: '@EDITOR/UPDATE_STATE',
+        CLEAR_STORE: '@EDITOR/CLEAR_STORE',
 
         INSERT: '@EDITOR/INSERT',
         UPDATE: '@EDITOR/UPDATE'
@@ -20,12 +20,12 @@ export const Action = {
 
 export const reducer = (state = initialState, action) => {
     switch (action.type){
+        default:
+            return state;
         case Action.Types.INSERT : 
             return {
                 ...state,
                 ...action.payload
             };
-        default:
-            return state;
     }
 }
