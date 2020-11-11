@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import React, { memo } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Input, Switch } from "antd";
 import { Editor as TestEdit } from "@toast-ui/react-editor";
@@ -6,13 +8,15 @@ import "tui-editor/dist/tui-editor.css"; // editor's ui
 import "tui-editor/dist/tui-editor-contents.css"; // editor's content
 import "codemirror/lib/codemirror.css"; // codemirror
 
-const Editor = ({
-  editorRef,
-  onChangeTitle,
-  onChangePassword,
-  isSecret,
-  onChangeIsSecret,
-}) => {
+const Editor = (props) => {
+  const {
+    editorRef,
+    onChangeTitle,
+    onChangePassword,
+    isSecret,
+    onChangeIsSecret,
+  } = props;
+
   return (
     <Wrapper>
       <ComponentWrapper>
@@ -54,4 +58,20 @@ const ComponentWrapper = styled.div`
   margin-bottom: 20px;
 `;
 
-export default Editor;
+Editor.PropTypes = {
+  editorRef: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  onChangeTitle: PropTypes.string,
+  onChangePassword: PropTypes.string,
+  isSecret: PropTypes.bool,
+  onChangeIsSecret: PropTypes.func,
+};
+
+Editor.defaultProps = {
+  editorRef: <></>,
+  onChangeTitle: "",
+  onChangePassword: "",
+  isSecret: false,
+  onChangeIsSecret: () => {},
+};
+
+export default memo(Editor);

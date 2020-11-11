@@ -1,4 +1,4 @@
-import { Auth, nonAuthAPI } from "./Auth";
+import { auth, nonAuthAPI } from "./Auth";
 
 // email
 const checkEmail = ({ body }) => {
@@ -17,13 +17,13 @@ const register = ({ body }) => {
 
 // confirmation-code - 인증메일 발송 버튼
 const requestConfirmationCode = ({ token }) => {
-  const authAPI = Auth.create(token);
+  const authAPI = auth.create(token);
   return authAPI.get("/auth/confirmation-code");
 };
 
 // confirmation-code 받은 인증코드 확인 버튼
 const confirmed = ({ token, body }) => {
-  const authAPI = Auth.create(token);
+  const authAPI = auth.create(token);
   return authAPI.put("/auth/confirmation-code", body);
 };
 
@@ -37,19 +37,19 @@ const login = ({ body }) => {
 
 // name, password
 const updateUser = ({ token, body }) => {
-  const authAPI = Auth.create(token);
+  const authAPI = auth.create(token);
   return authAPI.put("/auth/user", body);
 };
 
 // email 미완성
 const deleteUser = ({ token, body }) => {
-  const authAPI = Auth.create(token);
+  const authAPI = auth.create(token);
   return authAPI.delete("/auth/user");
 };
 
 // role
 const changeRoles = ({ token, body }) => {
-  const authAPI = Auth.create(token);
+  const authAPI = auth.create(token);
   return authAPI.post("/auth/changeRoles", body);
 };
 

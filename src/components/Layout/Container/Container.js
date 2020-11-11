@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const Container = (props) => {
@@ -12,4 +13,13 @@ const Wrapper = styled.div`
   margin: 0 auto;
 `;
 
+Container.PropTypes = {
+  children: PropTypes.element,
+  style: PropTypes.func,
+};
+
+Container.defaultProps = {
+  children: <></>,
+  style: () => {},
+};
 export default Container;

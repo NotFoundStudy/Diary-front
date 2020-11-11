@@ -17,7 +17,6 @@ const insert = async ({
     password,
   };
   const res = await api.post("/board/create-board", body);
-  console.log(res);
   return res;
 };
 

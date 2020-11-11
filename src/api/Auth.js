@@ -16,4 +16,4 @@ export const auth = {
   },
 };
 
-export const nonAuthAPI = Auth.create();
+export const nonAuthAPI = auth.create();
